@@ -1,0 +1,12 @@
+# git ignore les fichiers suivants
+atelier_codage_robocup_mail_github.odt
+
+# Ignore Logs, freecad and ideamaker
+**/*.log
+**/*.doc
+**/*.idea
+**/*.gcode
+**/*.FCStd
+**/*.fcstd
+**/*.FCBak
+
