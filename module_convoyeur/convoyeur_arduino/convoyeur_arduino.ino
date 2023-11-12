@@ -3,11 +3,12 @@
     convoyeur
     jlm nov 2023
     nema 17 sur X (shield CNC arduino uno)
+    https://passionelectronique.fr/tutoriel-l298n/
 ************************************************/
 
 //=============================
 // inclusion des bibliothèques
-//============================
+//=============================
 //#include "Timer.h"      //http://github.com/JChristensen/Timer
 #include <Wire.h>       //composants utilisant le protocole I2C
 #include "variables.h"
@@ -45,12 +46,19 @@ void setup() {
   Serial.println();
   Serial.println("Demarrage du convoyeur avec le sensor ir");
 
+  // Configuration des pins de l'Arduino en "sortie" 
+  pinMode(borneENB, OUTPUT);
+  pinMode(borneIN3, OUTPUT);
+  pinMode(borneIN4, OUTPUT);
+  digitalWrite(borneENB, LOW);        // arret du moteur 1
+  
+/*
   // stepper nema17
   pinMode(enPin, OUTPUT);  // enable driver X
   digitalWrite(enPin, LOW);
-
   pinMode(stepPin, OUTPUT);  // impulsion effectue une step.
   pinMode(dirPin, OUTPUT);   // permet d'indiquer la direction de rotation du moteur
+  */
 /*
   // timer entre deux implulsions - utilise milli()
   timer.oscillate(stepPin, motorSpeed, HIGH);
@@ -165,6 +173,19 @@ void receiveEvents(int howMany) {
 }
 #endif
 
+//=============================
+// Fonction : lancerRotationMoteurPontA()
+// But :      Active l'alimentation du moteur connecte sur le pont A
+//            pendant 2 secondes, puis le met à l'arret (au moins 1 seconde)
+//=============================
+void lancerRotationMoteurPontB() {
+  digitalWrite(borneENB, HIGH);       // Active l'alimentation du moteur 1
+  delay(5000);                        // et attend 2 secondes
+  
+  digitalWrite(borneENB, LOW);        // Desactive l'alimentation du moteur 1
+  delay(1000);                        // et attend 1 seconde
+}
+
 //======
 // loop
 //======
@@ -172,7 +193,7 @@ void loop() {
   // timer entre deux implulsions - utilise milli()
   //timer.oscillate(stepPin, motorSpeed, HIGH);
   //timer.oscillate(stepPin, motorSpeed, LOW);
-  
+  /*
   // sens de rotation
   if (motorInverse) {
     //sens horaire, LOW pour inverser
@@ -189,8 +210,24 @@ void loop() {
     delayMicroseconds(pulseWidthMicros);
     //timer.update(); // mise a jour du timer - utilise milli
   }
+  */
 
 #if TEST
+// Configuration du L298N en "marche avant", pour le moteur connecte au pont A. Selon sa table de verite, il faut que :
+  digitalWrite(borneIN3, HIGH);                 // L'entree IN1 doit etre au niveau haut
+  digitalWrite(borneIN4, LOW);                  // L'entree IN2 doit etre au niveau bas
+
+  // Et on lance le moteur (branche sur le pont A du L298N)
+  lancerRotationMoteurPontB();
+
+  // Puis on configure le L298N en "marche arriere", pour le moteur connecte sur le pont A.
+  digitalWrite(borneIN3, LOW);                  // L'entree IN1 doit être au niveau bas
+  digitalWrite(borneIN4, HIGH);                 // L'entree IN2 doit être au niveau haut
+
+  // Et on relance le moteur (branche sur le pont A du L298N)
+  lancerRotationMoteurPontB();
+
+/*
 // test du stepper nema17
   Serial.println(F("Running clockwise"));
   //sens horaire, LOW pour inverser
@@ -216,6 +253,7 @@ void loop() {
     delayMicroseconds(pulseWidthMicros);
   }
   delay(1000);
+  */
 #endif
 
 }

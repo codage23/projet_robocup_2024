@@ -8,13 +8,18 @@
 //========================================================
 // Differentes fonctions du programme
 //========================================================
-#define TEST 0       // if 1 true,  0 false
-#define I2C  1        // if 1 true,  0 false
+#define TEST 1       // if 1 true,  0 false
+#define I2C  0        // if 1 true,  0 false
 
 //==========================================
 // Affectation des broches de l'arduino uno
 //==========================================
-// Câblage:
+//====================================
+// Association des entrees du L298N
+//====================================
+#define borneENB        7       // On associe la borne "ENA" du L298N a la pin D10 de l'arduino
+#define borneIN3        9       // On associe la borne "IN1" du L298N a la pin D9 de l'arduino
+#define borneIN4        8       // On associe la borne "IN2" du L298N a la pin D8 de l'arduino
 
 
 //==================================================
@@ -26,16 +31,15 @@
 // Sensor IR
 //==========
 int IRSensor = 12; // connect IR sensor module to Arduino pin D12
-
 int LED = 13;      // connect LED to Arduino pin 13
 
 //==========
 // Variables
 //==========
+/*
 //==================
 // stepper
 //==================
-
 // nema 17 sur X
 const int enPin = 8;    // enable driver X
 const int stepXPin = 2; // X.STEP  envoyer une impulsion effectue une step.
@@ -46,11 +50,12 @@ int dirPin = dirXPin;
 
 int stepsPerRev = 200;        // nombre de pas  200 pour un moteur NEMA17 en full step , 2048 pour un 28BYJ-48
 int pulseWidthMicros  = 1500; // microsecondes - 2400 lent, 500 rapide - 2400 to 500, donc 24x100 to 5x100
-
+*/
 unsigned long motorSpeed = 2 ;   // 1 rapide , 2 moyen et 4 lent 
 //int motorStep = 20;            // 200 donc 20x10
 bool motorInverse = 1;           // sens
 bool stopStart = 1;              // 0 stop et 1 start
+
 
 //=====
 // I2C
