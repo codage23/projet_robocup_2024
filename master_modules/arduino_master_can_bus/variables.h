@@ -25,7 +25,6 @@
 // Association du CS du CAN MCP2515
 //==========================================
 #define mcp2515CSPin  10  // cs du circuit mcp2515
-char  caractere = '0';
 
 //========================
 // for non-bloking delays
