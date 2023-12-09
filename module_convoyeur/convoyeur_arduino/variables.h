@@ -8,7 +8,6 @@
 // Differentes fonctions du programme
 //========================================================
 #define TEST 0       // if 1 true,  0 false
-#define I2C  0       // if 1 true,  0 false
 #define AUTONOME 0   // if 1 convoyeur autonome, 0 commandes CAN bus
 #define debug 1      // for use Display log message if True
 
@@ -56,10 +55,6 @@ bool presentAbsent = 0;             // constante  objet 1 present, 0 absent
 //================
 const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 
-//==================================================
-// Definition de l'adresse logique de l'esclave I2C
-//==================================================
-#define I2C_SLAVE_CONVOYEUR  12
 
 //==========
 // Variables
@@ -71,12 +66,3 @@ bool marche = 1;              // 1 start
 bool arret = 0;               // 1 stop
 bool objetPresent = 0;        // pas d'objet 0
 
-//=====
-// I2C
-//=====
-String dataIn = "";
-int dataI2C = 0;
-bool requestI2C = 0;
-
-const unsigned int MAX_MESSAGE_LENGTH = 32;
-static char message[MAX_MESSAGE_LENGTH]; // longueur maxi du message I2C
