@@ -23,13 +23,14 @@
 // Affectation des broches de l'arduino uno
 // Association du CS du CAN MCP2515
 //==========================================
-#define mcp2515CSPin  10  // cs du circuit mcp2515
-char  caractere = '0';
+#define mcp2515CSPin  10  // cs chip select du circuit mcp2515
+char  caractere = '0';    // lecture can
+int  id = 0x0;            // valeur hexa de l'identification id sur le can bus
 
 //========================
 // for non-bloking delays
 //========================
-unsigned long nextTime; // For non-blocking delays
+unsigned long nextTime;  // For non-blocking delays
 
 //==========
 // Sensor IR
@@ -47,7 +48,7 @@ unsigned long nextTime; // For non-blocking delays
 const bool MARCHE_AVANT   = 1;            // constante  "marche avant"
 const bool MARCHE_ARRIERE = 0;            // constante  "marche arrière"
 
-int vitesse;         // vitesse de rotation du moteur, de (0) a (255) <= signal PWM
+int vitesse;                         // vitesse de rotation du moteur, de (0) a (255) <= signal PWM
 bool presentAbsent = 0;             // constante  objet 1 present, 0 absent 
 
 //================
@@ -59,10 +60,6 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 // Variables
 //==========
-
-int motorSpeed = 6 ;   // 6 to 25
-bool motorSens = 1;          // 1 marche avant, 0 marche arriere
-bool marche = 1;              // 1 start
-bool arret = 0;               // 1 stop
+bool marche = 1;              // 1 demarrage du moteur
 bool objetPresent = 0;        // pas d'objet 0
 

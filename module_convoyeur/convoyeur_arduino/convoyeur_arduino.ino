@@ -1,16 +1,16 @@
-/***********************************************
+/***************************************************************
     projet robocup 2024
     convoyeur
     mjc fablab atelier codage 2023 2024
     https://passionelectronique.fr/tutoriel-l298n/
     https://tutorial45.com/mcp2515-arduino-project-can-arduino/
     https://github.com/sandeepmistry/arduino-CAN/tree/master
-************************************************/
+***************************************************************/
 
 //=============================
 // inclusion des bibliothèques
 //=============================
-#include <SPI.h>        // pour la bibliothèque CAN
+#include <SPI.h>  // pour la bibliothèque CAN
 #include <CAN.h>
 #include "variables.h"  // fichier variables
 
@@ -19,10 +19,6 @@
 //======================
 bool sensorIR() {
   bool sensorStatus = digitalRead(IRSensor);  // read IRsensor
-  if (debug) {
-    //Serial.print("sensor statut : ");
-    //Serial.println(sensorStatus);
-  }
   return sensorStatus;
 }
 
@@ -39,7 +35,7 @@ void setup() {
   pinMode(borneIN3, OUTPUT);
   pinMode(borneIN4, OUTPUT);
 
-  // sensor ir
+  // sensor ir infra rouge
   pinMode(IRSensor, INPUT);  // IR Sensor pin INPUT
   pinMode(LED, OUTPUT);      // LED Pin Output
 
@@ -53,7 +49,6 @@ void setup() {
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
 }
-
 
 //=========================================
 // Fonction configurerSensDeRotationPontB()
@@ -86,7 +81,8 @@ void changeVitesseMoteurPontB(int nouvelleVitesse) {
 //==========================
 void onReceive(int packetSize) {
   while (CAN.available()) {
-    caractere = (char)CAN.read();
+    caractere = (char)CAN.read();  // lecture du bus can dans la variable caractere
+    id = CAN.packetId();           // id du message can  dans la variable id
   }
 }
 
@@ -94,21 +90,9 @@ void onReceive(int packetSize) {
 // loop
 //======
 void loop() {
-  /*
-  // send packet: id is 11 bits, packet can contain up to 8 bytes of data
-  Serial.print("Sending packet ... ");
-  CAN.beginPacket(0x12);
-  CAN.write('h');
-  CAN.write('e');
-  CAN.write('l');
-  CAN.write('l');
-  CAN.write('o');
-  CAN.endPacket();
-  Serial.println("done");
-*/
-  if (marche) {  // demarrage progessif - une seule fois
-    //sens de rotation du moteur en "marche avant"
-    configurerSensDeRotationPontB(MARCHE_AVANT);
+  // demarrage progessif - une seule fois
+  if (marche) {
+    configurerSensDeRotationPontB(MARCHE_AVANT);  //sens de rotation du moteur en "marche avant"
     // depart progresif du moteur, vitesse maxi 255
     for (vitesse = vitesseMinimale; vitesse < vitesseMaximale; vitesse++) {
       changeVitesseMoteurPontB(vitesse);  // vitesse moteur avec signal PWM
@@ -117,39 +101,46 @@ void loop() {
     marche = 0;  // pour avoir un seul demarrage progessif
   }
 
-  // Check if the pin high or not IRsensor - objet present
-  if ((sensorIR() == 0) and (presentAbsent == 0)) {
-    digitalWrite(LED, HIGH);  // LED High
-    presentAbsent = 1;        // objet present
-    CAN.beginPacket(0x12);
-    CAN.write('P');           // envoi objet present P
-    CAN.endPacket();
+  // test la presence d'un objet avec le detecteur ir
+  if ((sensorIR() == 0) and (presentAbsent == 0)) {  // objet present
+    digitalWrite(LED, HIGH);                         // LED High
+    presentAbsent = 1;                               // objet present
+    CAN.beginPacket(0x12);                           // id 0x12 pour le detecteur ir du convoyeur
+    CAN.write('P');                                  // envoi objet present P
+    CAN.endPacket();                                 // envoi sur le bus can
     if (debug) {
       Serial.println("Sending packet objet present");
     }
-  } else if ((sensorIR() == 1) and (presentAbsent == 1)) {  // objet absent
-    digitalWrite(LED, LOW);  // LED LOW
-    presentAbsent = 0;       // objet absent
-    CAN.beginPacket(0x12);
-    CAN.write('A');          // envoi objet absent A
-    CAN.endPacket();
+  }
+
+  if ((sensorIR() == 1) and (presentAbsent == 1)) {  // objet absent
+    digitalWrite(LED, LOW);                          // LED LOW
+    presentAbsent = 0;                               // objet absent
+    CAN.beginPacket(0x12);                           // id 0x12 pour le detecteur ir du convoyeur
+    CAN.write('A');                                  // envoi objet absent A
+    CAN.endPacket();                                 // envoi sur le bus can
     if (debug) {
       Serial.println("Sending packet objet absent");
     }
   }
 
-  if (caractere == 'S') {         // reception cde S du master
-    changeVitesseMoteurPontB(0);  // arret moteur - vitesse a 0
-    caractere = '0';
+  if (caractere == 'S' and id == 0x11) {         // reception commande S du master id 0x11
+    changeVitesseMoteurPontB(0);                 // arret moteur - vitesse nul
+    caractere = '0';                             // effacement du caratere apres lecture
+    id = 0x0;                                    // effacement de la variable id apres lecture
   }
-  if (caractere == 'D') {         // reception cde D du master
-    marche = 1;                   //  pour valider un nouveau demarrage des que l'objet n'est plus present
-    caractere = '0';
+  if (caractere == 'D' and id == 0x11) {         // reception commande D du master  id 0x11
+    marche = 1;                                  //  pour valider un nouveau demarrage car l'objet n'est plus present
+    caractere = '0';                             // effacement du caratere apres lecture
+    id = 0x0;                                    // effacement de la variable id apres lecture
   }
 
-
+//====================================
+// convoyeur autonome - sans le master
+//====================================
 #if AUTONOME
-  if (marche) {  // demarrage progessif une seule fois
+  // demarrage progessif du moteur une seule fois
+  if (marche) {
     //sens de rotation du moteur en "marche avant"
     configurerSensDeRotationPontB(MARCHE_AVANT);
     // depart progresif du moteur, vitesse maxi 255
@@ -170,18 +161,20 @@ void loop() {
       Serial.println("objet absent");
     }
   }
-  if (sensorIR() == 0) {  // objet present
-    //else turn on the onboard LED
+  if (sensorIR() == 0) {      // objet present
     digitalWrite(LED, HIGH);  // LED High
     // arret moteur
-    changeVitesseMoteurPontB(0);
-    objetPresent = 1;  // objet present 1
+    changeVitesseMoteurPontB(0);  // vitesse nul
+    objetPresent = 1;             // objet present 1
     if (debug) {
       Serial.println("objet present");
     }
   }
 #endif
 
+//====================================
+// convoyeur test - sans le master
+//====================================
 #if TEST
   //avant
   //sens de rotation du moteur en "marche avant"

@@ -19,7 +19,7 @@
 //========================
 // for non-bloking delays
 //========================
-unsigned long nextTime; // For non-blocking delays
+unsigned long nextTime;   // For non-blocking delays
 
 //================
 // bus can mcp2515
@@ -29,5 +29,7 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 // Variables
 //==========
+char  caractere = '0';     // lecture can
+int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 
 
