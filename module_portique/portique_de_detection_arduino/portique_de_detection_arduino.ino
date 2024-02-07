@@ -2,7 +2,7 @@
   projet robocup 2024
     detecteur de couleur
     mjc fablab atelier codage 2023 2024
-url: https://github.com/Panjkrc/TCS3200_library
+  url: https://github.com/Panjkrc/TCS3200_library
 ************************************************/
 
 //=============================
@@ -23,8 +23,8 @@ String colorNames[num_of_colors] = { "white", "noir", "red", "yellow", "green", 
 char colorLetter[num_of_colors] = { 'W', 'N', 'R', 'Y', 'G', 'T', 'B' };
 
 // distinctRGB[] array declares calibration values for each declared color in distinctColors[] array
-int distinctRGB_1[num_of_colors][3] = { { 14, 14, 16 }, { 8, 7, 8 }, { 23, 17, 20 }, { 23, 21, 22 }, { 19, 20, 21 }, { 31, 15, 14 }, { 18, 20, 26 } };
-int distinctRGB_2[num_of_colors][3] = { { 16, 17, 18 }, { 8, 7, 8 }, { 19, 12, 14 }, { 30, 25, 21 }, { 16, 20, 19 }, { 20, 16, 17 }, { 13, 16, 23 } };
+int distinctRGB_1[num_of_colors][3] = { { 23, 21, 24 }, { 8, 7, 8 }, { 25, 19, 20 }, { 66, 58, 55 }, { 45, 50, 50 }, { 24, 21, 20 }, { 38, 41, 52 } };
+int distinctRGB_2[num_of_colors][3] = { { 21, 20, 23 }, { 8, 7, 8 }, { 19, 12, 14 }, { 47, 38, 29 }, { 21, 28, 25 }, { 20, 16, 17 }, { 16, 21, 33 } };
 
 tcs3200 tcs_1(S0_1, S1_1, S2_1, S3_1, sensorOut_1);  // (S0, S1, S2, S3, output pin) //  https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
 tcs3200 tcs_2(S0_2, S1_2, S2_2, S3_2, sensorOut_2);
@@ -104,13 +104,13 @@ void portiqueIR() {
     sensor_ir_mem = sensor_ir;
     if (sensor_ir == 0) {
       int couleur_1 = color_1();
-      CAN.beginPacket(0x17);              // id 0x12 pour le detecteur ir du convoyeur
+      CAN.beginPacket(0x16);              // id 0x16 pour le detecteur de couleur_1
       CAN.write(colorLetter[couleur_1]);  // ecriture de la couleur detectee
       //Serial.println(colorLetter[couleur_1]);
       CAN.endPacket();  // envoi sur le bus can
     } else if (sensor_ir == 1) {
       int couleur_2 = color_2();
-      CAN.beginPacket(0x17);              // id 0x12 pour le detecteur ir du convoyeur
+      CAN.beginPacket(0x19);              // id 0x19 pour le detecteur de couleur_2
       CAN.write(colorLetter[couleur_2]);  // ecriture de la couleur detectee
       //Serial.println(colorLetter[couleur_2]);
       CAN.endPacket();  // envoi sur le bus can

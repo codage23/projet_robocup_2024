@@ -48,6 +48,22 @@ void onReceive(int packetSize) {
 // loop
 //======
 void loop() {
+    
+// reception du portique id 0x16 - cube R  rouge
+  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y')  and id == 0x16) {
+    if (debug) {
+      Serial.print("caractere recu  ");
+      Serial.print(caractere);
+      Serial.print("   id  ");
+      Serial.println(id, HEX);
+    }
+    caractere = '0';        // effacement du caratere apres lecture
+    id = 0x0;               // effacement de la variable id apres lecture
+    CAN.beginPacket(0x17);  // id 0x17 pour envoyer la couleur a l'affichage
+    CAN.write(caractere);         // cube de couleur rouge 
+    CAN.endPacket();        // envoi sur le bus can
+  }
+  
   // reception du convoyeur id 0x12 - objet present P
   if (caractere == 'P' and id == 0x12) {
     if (debug) {
@@ -61,6 +77,11 @@ void loop() {
     CAN.beginPacket(0x11);  // id 0x11 pour envoyer le stop pour le moteur du convoyeur
     CAN.write('S');         // objet present sur le convoyeur commande stop S
     CAN.endPacket();        // envoi sur le bus can
+
+    CAN.beginPacket(0x18);  // id 0x18 demande au bras si il est dispo
+    CAN.write('D');         // caractere de disponibilite
+    CAN.endPacket();        // envoi sur le bus can
+    
   }
 
   // reception du convoyeur id 0x12 - objet absent A
@@ -77,4 +98,5 @@ void loop() {
     CAN.write('D');         // objet absent sur le convoyeur commande demarrage D
     CAN.endPacket();        // envoi sur le bus can
   }
+
 }
