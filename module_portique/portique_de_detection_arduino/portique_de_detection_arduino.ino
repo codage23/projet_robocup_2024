@@ -23,8 +23,8 @@ String colorNames[num_of_colors] = { "white", "noir", "red", "yellow", "green", 
 char colorLetter[num_of_colors] = { 'W', 'N', 'R', 'Y', 'G', 'T', 'B' };
 
 // distinctRGB[] array declares calibration values for each declared color in distinctColors[] array
-int distinctRGB_1[num_of_colors][3] = { { 23, 21, 24 }, { 8, 7, 8 }, { 25, 19, 20 }, { 66, 58, 55 }, { 45, 50, 50 }, { 24, 21, 20 }, { 38, 41, 52 } };
-int distinctRGB_2[num_of_colors][3] = { { 21, 20, 23 }, { 8, 7, 8 }, { 19, 12, 14 }, { 47, 38, 29 }, { 21, 28, 25 }, { 20, 16, 17 }, { 16, 21, 33 } };
+int distinctRGB_1[num_of_colors][3] = { { 200, 200, 200 }, { 7, 6, 8 }, { 76, 47, 47 }, { 90, 76, 100 }, { 55, 66, 71 }, { 250, 250, 250 }, { 41, 47, 47 } };
+int distinctRGB_2[num_of_colors][3] = { { 200, 200, 200 }, { 7, 6, 8 }, { 55, 21, 27 }, { 71, 58, 40 }, { 27, 40,34 }, { 250, 250, 250 }, { 23, 31, 50 } };
 
 tcs3200 tcs_1(S0_1, S1_1, S2_1, S3_1, sensorOut_1);  // (S0, S1, S2, S3, output pin) //  https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
 tcs3200 tcs_2(S0_2, S1_2, S2_2, S3_2, sensorOut_2);
@@ -108,12 +108,14 @@ void portiqueIR() {
       CAN.write(colorLetter[couleur_1]);  // ecriture de la couleur detectee
       //Serial.println(colorLetter[couleur_1]);
       CAN.endPacket();  // envoi sur le bus can
+      Serial.println(colorLetter[couleur_1]);
     } else if (sensor_ir == 1) {
       int couleur_2 = color_2();
       CAN.beginPacket(0x19);              // id 0x19 pour le detecteur de couleur_2
       CAN.write(colorLetter[couleur_2]);  // ecriture de la couleur detectee
       //Serial.println(colorLetter[couleur_2]);
       CAN.endPacket();  // envoi sur le bus can
+      Serial.println(colorLetter[couleur_2]);
     }
   }
 }

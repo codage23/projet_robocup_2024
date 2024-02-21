@@ -49,10 +49,14 @@ void onReceive(int packetSize) {
 //======
 void loop() {
     
-// reception du portique id 0x16 - cube R  rouge
-  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y')  and id == 0x16) {
+// reception du portique id 0x16 - couleur du cube
+  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y')  and (id == 0x16 or id == 0x19)) {
     if (debug) {
-      Serial.print("caractere recu  ");
+      Serial.print("caractere recu : couleur cube ");
+      if (caractere == 'R') Serial.print("red : ");
+      if (caractere == 'G') Serial.print("green : ");
+      if (caractere == 'B') Serial.print("blue : ");
+      if (caractere == 'Y') Serial.print("yellow : ");
       Serial.print(caractere);
       Serial.print("   id  ");
       Serial.println(id, HEX);
@@ -67,7 +71,7 @@ void loop() {
   // reception du convoyeur id 0x12 - objet present P
   if (caractere == 'P' and id == 0x12) {
     if (debug) {
-      Serial.print("caractere recu  ");
+      Serial.print("caractere recu : objet present : ");
       Serial.print(caractere);
       Serial.print("   id  ");
       Serial.println(id, HEX);
@@ -87,7 +91,7 @@ void loop() {
   // reception du convoyeur id 0x12 - objet absent A
   if (caractere == 'A' and id == 0x12) {
     if (debug) {
-      Serial.print("caractere recu  ");
+      Serial.print("caractere recu : objet absent  : ");
       Serial.print(caractere);
       Serial.print("   id  ");
       Serial.println(id, HEX);
