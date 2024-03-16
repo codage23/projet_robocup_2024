@@ -12,6 +12,12 @@
 #include <CAN.h>  // pour la bibliothèque CAN
 #include <SPI.h>
 #include "variables.h"  // fichier variables
+#include <Servo.h>
+
+//==============
+// objet servo01
+//==============
+Servo servo01; //Distrib
 
 //======
 // setup
@@ -22,6 +28,11 @@ void setup() {
     ;
 
   Serial.println("Demarrage du distributeur");
+
+  servo01.attach(DISTRIB);
+  servo1PPos = PP_DISTRIB;  //  initial position
+  servo01.write(servo1PPos);
+
 
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
@@ -44,23 +55,34 @@ void onReceive(int packetSize) {
   }
 }
 
-//======
-// loop
-//======
-void loop() {
-  // reception commande L du master id 0x14 - liberer un cube
-  if (caractere == 'L' and id == 0x14) {
-    
-  //activer le servo moteur pour liberer un cube
-
-    if (debug) {
-      Serial.print("caractere recu : liberer un cube :  ");
-      Serial.print(caractere);
-      Serial.print("   id  ");
-      Serial.println(id, HEX);
-    }
-    caractere = '0';        // effacement du caratere apres lecture
-    id = 0x0;               // effacement de la variable id apres lecture
+void libererCube() {
+  delay(1000);
+  // tour max de 180 a 0º
+  for (int i = max; i > min; i--) {
+    servo01.write(i);
+    Serial.print("Angle:180  ");
+    Serial.println(i);
   }
-
 }
+
+  //======
+  // loop
+  //======
+  void loop() {
+    // reception commande L du master id 0x14 - liberer un cube
+    if (caractere == 'L' and id == 0x14) {
+
+      libererCube();
+
+      if (debug) {
+        Serial.print("caractere recu : liberer un cube :  ");
+        Serial.print(caractere);
+        Serial.print("   id  ");
+        Serial.println(id, HEX);
+      }
+      caractere = '0';        // effacement du caratere apres lecture
+      id = 0x0;               // effacement de la variable id apres lecture
+    }
+libererCube();
+
+  }

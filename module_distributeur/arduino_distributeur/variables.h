@@ -32,4 +32,24 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 char  caractere = '0';     // lecture can
 int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 
+//==========================================
+// Affectation des broches de l'arduino uno
+//==========================================
+#define DISTRIB 5
 
+//===========================
+// initial position
+//===========================
+#define PP_DISTRIB 90
+
+//==================
+// current position
+//==================
+int servo1Pos;
+
+//==================
+// previous position
+//==================
+int servo1PPos;
+
+int min = 0, max = 180;
