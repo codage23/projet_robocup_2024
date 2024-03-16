@@ -5,7 +5,10 @@
     https://tutorial45.com/mcp2515-arduino-project-can-arduino/
     https://github.com/sandeepmistry/arduino-CAN/tree/master
     Le bus de données CAN (Controller Area Network)
-    est un bus système série très répandu dans beaucoup d'industries, notamment l'automobile
+    est un bus système série très répandu dans beaucoup d'industries, notamment l'automobile.
+    Il met en application une approche connue sous le nom de multiplexage,
+    et qui consiste à raccorder à un même câble (un bus) un grand nombre de calculateurs qui communiqueront donc à tour de rôle.
+    Cette technique élimine le besoin de câbler des lignes dédiées pour chaque information à faire transiter.
     https://community.element14.com/products/arduino/arduino-projects/b/blog/posts/6-axis-robotic-arm-with-servo-motors
 ***********************************************************************************************************************/
 
