@@ -32,14 +32,42 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 char caractere = '0';  // lecture can
 int id = 0x0;          // valeur hexa de l'identification id sur le can bus
 
-//==========
-// Servo
-//==========
+//=======
+// Servos
+//=======
 #define SERVOMIN 100  // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX 500  // This is the 'maximum' pulse length count (out of 4096)
 int velocidad = 450;  // Velocidad du mouvement
-// variables pour le servo moteur
+
+// mini, neutre et maxi de tous les servos
+#define MINIWAIST0 100    // position minimum du servo 0  waist - taille
+#define NEUTREWAIST0 320  // position neutre du servo  0
+#define MAXIWAIST0 500    // position maximum du servo 0
+
+#define MINISHOULDER1 100    // position minimum du servo 1  shoulder - epaule
+#define NEUTRESHOULDER1 360  // position neutre du servo  1
+#define MAXISHOULDER1 500    // position maximum du servo 1
+
+#define MINIELBOW2 100    // position minimum du servo 2  elbow - coude
+#define NEUTREELBOW2 250  // position neutre du servo  2
+#define MAXIELBOW2 500    // position maximum du servo 2
+
+#define MINIWRISTROLL3 100    // position minimum du servo 3  wrist roll - tour de poignet
+#define NEUTREWRISTROLL3 250  // position neutre du servo  3
+#define MAXIWRISTROLL3 500    // position maximum du servo 3
+
+#define MINIWRISTPITCH4 100    // position minimum du servo 4  wrist pitch - pas du poignet
+#define NEUTREWRISTPITCH4 250  // position neutre du servo  4
+#define MAXIWRISTPITCH4 500    // position maximum du servo 4
+
+#define MINIGRIPPER5 100    // position minimum du servo 5  gripper - pince
+#define NEUTREGRIPPER5 250  // position neutre du servo  5
+#define MAXIGRIPPER5 500    // position maximum du servo 5
+
+/*
+// variables pour le test du servo moteur
 int neutre;  // position neutre
 int maxi;
 int mini;
 int servo;  // numero
+*/
