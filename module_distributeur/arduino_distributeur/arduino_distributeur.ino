@@ -12,12 +12,15 @@
 #include <CAN.h>  // pour la bibliothèque CAN
 #include <SPI.h>
 #include "variables.h"  // fichier variables
-#include <Servo.h>
+//#include <Servo.h>
+#include <ServoTimer2.h>  // the servo library avec le timer 2 de la carte uno
+
 
 //==============
 // objet servo01
 //==============
-Servo servo01; //Distrib
+//Servo servo01; //Distrib
+ServoTimer2 servo01;
 
 //======
 // setup
@@ -30,8 +33,9 @@ void setup() {
   Serial.println("Demarrage du distributeur");
 
   servo01.attach(DISTRIB);
-  servo1PPos = PP_DISTRIB;  //  initial position
-  servo01.write(servo1PPos);
+  //servo1PPos = PP_DISTRIB;  //  initial position
+  //servo01.write(servo1PPos);
+  servo01.write(POSITIONSTOP);  // environ 1500
 
 
   // start the CAN bus at 125 kbps
@@ -56,6 +60,27 @@ void onReceive(int packetSize) {
 }
 
 void libererCube() {
+  // marche avant du servo pendant le temps defini dans la variable interval
+  currentTime = millis();
+  interval = interval_avant_milli;  
+  previousTime = currentTime;
+  while ((currentTime - previousTime) < interval) {
+    currentTime = millis();
+    servo01.write(POSITIONAVANT);  // avant
+  }
+
+  // marche arriere du servo pendant le temps defini dans la variable interval
+  currentTime = millis();
+  interval = interval_arriere_milli;
+  previousTime = currentTime;
+  while ((currentTime - previousTime) < interval) {
+    currentTime = millis();
+    servo01.write(POSITIONRETOUR);  // arriere
+  }
+
+  servo01.write(POSITIONSTOP);  // stop du servo moteur
+
+  /*
   delay(1000);
   // tour max de 180 a 0º
   for (int i = max; i > min; i--) {
@@ -63,26 +88,23 @@ void libererCube() {
     Serial.print("Angle:180  ");
     Serial.println(i);
   }
+  */
 }
 
-  //======
-  // loop
-  //======
-  void loop() {
-    // reception commande L du master id 0x14 - liberer un cube
-    if (caractere == 'L' and id == 0x14) {
-
-      libererCube();
-
-      if (debug) {
-        Serial.print("caractere recu : liberer un cube :  ");
-        Serial.print(caractere);
-        Serial.print("   id  ");
-        Serial.println(id, HEX);
-      }
-      caractere = '0';        // effacement du caratere apres lecture
-      id = 0x0;               // effacement de la variable id apres lecture
+//======
+// loop
+//======
+void loop() {
+  // reception commande L du master id 0x14 - liberer un cube
+  if (caractere == 'L' and id == 0x14) {
+    libererCube();  // liberer le cube avec le servo moteur
+    if (debug) {
+      Serial.print("caractere recu : liberer un cube :  ");
+      Serial.print(caractere);
+      Serial.print("   id  ");
+      Serial.println(id, HEX);
     }
-libererCube();
-
+    caractere = '0';  // effacement du caratere apres lecture
+    id = 0x0;         // effacement de la variable id apres lecture
   }
+}
