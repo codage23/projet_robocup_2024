@@ -7,7 +7,6 @@
 //========================================================
 // Differentes fonctions du programme
 //========================================================
-#define TEST 0       // if 1 true,  0 false
 #define debug 1      // for use Display log message if True
 
 //==========================================
@@ -31,5 +30,11 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 char  caractere = '0';     // lecture can
 int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
+
+//==========
+// afficheur
+//==========
+#define NUM_LEDS 256            // nombre de leds ar panneau 256 leds 16x16
+#define DATA_PIN_ARDUINO 9      // broche arduino
 
 

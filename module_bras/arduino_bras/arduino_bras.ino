@@ -283,13 +283,13 @@ void loop() {
     delay(1000);
     download_object();            // Position of the Servo Motors to download the objet
     delay(1000);
-    if ( caractere == R) {
+    if ( caractere == 'R') {
       deplacementCaseRed();       // deplacement du cube rouge
-    } else if (caractere == G) {
+    } else if (caractere == 'G') {
       deplacementCaseGreen();     // deplacement du cube vert
-    } else if (caractere == B) {
+    } else if (caractere == 'B') {
       deplacementCaseBlue();      // deplacement du cube bleu
-    } else if (caratere == Y) {
+    } else if (caratere == 'Y') {
       deplacementCaseYellow();    // deplacement du cube jaune
     }
     exit_download_object();       // relache du cube

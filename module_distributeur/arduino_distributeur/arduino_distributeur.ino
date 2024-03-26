@@ -69,6 +69,8 @@ void libererCube() {
     servo01.write(POSITIONAVANT);  // avant
   }
 
+  delay(500);
+
   // marche arriere du servo pendant le temps defini dans la variable interval
   currentTime = millis();
   interval = interval_arriere_milli;
