@@ -62,13 +62,12 @@ void onReceive(int packetSize) {
 void libererCube() {
   // marche avant du servo pendant le temps defini dans la variable interval
   currentTime = millis();
-  interval = interval_avant_milli;  
+  interval = interval_avant_milli;
   previousTime = currentTime;
   while ((currentTime - previousTime) < interval) {
     currentTime = millis();
     servo01.write(POSITIONAVANT);  // avant
   }
-
   delay(500);
 
   // marche arriere du servo pendant le temps defini dans la variable interval
@@ -79,18 +78,10 @@ void libererCube() {
     currentTime = millis();
     servo01.write(POSITIONRETOUR);  // arriere
   }
-
+  delay(500);
+  
   servo01.write(POSITIONSTOP);  // stop du servo moteur
-
-  /*
-  delay(1000);
-  // tour max de 180 a 0º
-  for (int i = max; i > min; i--) {
-    servo01.write(i);
-    Serial.print("Angle:180  ");
-    Serial.println(i);
-  }
-  */
+  delay(500);
 }
 
 //======
@@ -99,7 +90,9 @@ void libererCube() {
 void loop() {
   // reception commande L du master id 0x14 - liberer un cube
   if (caractere == 'L' and id == 0x14) {
+
     libererCube();  // liberer le cube avec le servo moteur
+
     if (debug) {
       Serial.print("caractere recu : liberer un cube :  ");
       Serial.print(caractere);
