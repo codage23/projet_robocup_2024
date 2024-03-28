@@ -32,17 +32,29 @@ void onReceive(int packetSize) {
 // setup
 //======
 void setup() {
+  /*
+  if (debug) {
   Serial.begin(9600);
   while (!Serial)
     ;
+  }
+  */
 
-  Serial.println("Demarrage de l'afficheur");
+  /*
+  if (debug) {
+    Serial.println("Demarrage de l'afficheur");
+  }
+  */
 
   FastLED.addLeds<WS2812B, DATA_PIN_ARDUINO, RGB>(leds, NUM_LEDS);  // GRB ordering is typical
 
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
-    Serial.println("Starting CAN failed!");
+    /*
+    if (debug) {
+      Serial.println("Starting CAN failed!");
+    }
+    */
     while (1)
       ;
   }
@@ -65,17 +77,9 @@ void loop() {
         leds[i] = CRGB::Red;
         FastLED.show();
       }
-      for (int i = 256; i < (NUM_LEDS + 256); i++) {
-        leds[i] = CRGB::Red;
-        FastLED.show();
-      }
     } else if (caractere == 'G') {
       // affichage de la couleur verte
       for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = CRGB::Green;
-        FastLED.show();
-      }
-      for (int i = 256; i < (NUM_LEDS + 256); i++) {
         leds[i] = CRGB::Green;
         FastLED.show();
       }
@@ -85,17 +89,9 @@ void loop() {
         leds[i] = CRGB::Blue;
         FastLED.show();
       }
-      for (int i = 256; i < (NUM_LEDS + 256); i++) {
-        leds[i] = CRGB::Blue;
-        FastLED.show();
-      }
     } else if (caractere == 'Y') {
       // affichage de la couleur jaune
       for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = CRGB::Yellow;
-        FastLED.show();
-      }
-      for (int i = 256; i < (NUM_LEDS + 256); i++) {
         leds[i] = CRGB::Yellow;
         FastLED.show();
       }
@@ -106,12 +102,8 @@ void loop() {
       FastLED.show();
       //delay(100);
     }
-    for (int i = 256; i < (NUM_LEDS + 256); i++) {
-      leds[i] = CRGB::Black;
-      FastLED.show();
-      //delay(100);
-    }
 
+    /*
     if (debug) {
       Serial.print("caractere recu : couleur cube ");
       if (caractere == 'R') Serial.print("red : ");
@@ -122,7 +114,7 @@ void loop() {
       Serial.print("   id  ");
       Serial.println(id, HEX);
     }
-
+    */
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
   }
