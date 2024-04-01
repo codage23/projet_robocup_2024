@@ -10,6 +10,9 @@
     et qui consiste à raccorder à un même câble (un bus) un grand nombre de calculateurs qui communiqueront donc à tour de rôle.
     Cette technique élimine le besoin de câbler des lignes dédiées pour chaque information à faire transiter.
     https://community.element14.com/products/arduino/arduino-projects/b/blog/posts/6-axis-robotic-arm-with-servo-motors
+    https://circuitdigest.com/microcontroller-projects/pca9685-multiple-servo-control-using-arduino
+    http://wiki.sunfounder.cc/index.php?title=PCA9685_16_Channel_12_Bit_PWM_Servo_Driver
+    https://www.gotronic.fr/pj-1835.pdf
 ***********************************************************************************************************************/
 
 //=============================
