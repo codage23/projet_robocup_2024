@@ -7,6 +7,7 @@
     https://github.com/Jorgen-VikingGod/LEDMatrix
     https://electroniqueamateur.blogspot.com/2021/03/ecrire-des-nombres-sur-une-matrice-de.html
     https://electroniqueamateur.blogspot.com/2020/05/matrice-de-leds-rgb-16-x-16-ws2812b-et.html
+    * https://www.instructables.com/16x16-RGB-LED-Panel-Arduino-Projects/
 ***************************************************************/
 
 //=============================
@@ -49,7 +50,7 @@ void setup() {
   }
 
   FastLED.addLeds<CHIPSET , DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(50);
+  FastLED.setBrightness(50); //Number 0-255
   FastLED.clear(true);
 /*
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalSMD5050);
