@@ -50,7 +50,7 @@ void setup() {
   }
 
   FastLED.addLeds<CHIPSET , DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(50); //Number 0-255
+  FastLED.setBrightness(10); //Number 0-255
   FastLED.clear(true);
 /*
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalSMD5050);
@@ -82,6 +82,7 @@ void setup() {
 // loop
 //======
 void loop() {
+
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
     if (caractere == 'R') {
