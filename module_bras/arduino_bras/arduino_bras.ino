@@ -29,23 +29,28 @@ Adafruit_PWMServoDriver pca9685 = Adafruit_PWMServoDriver();
 //=======================
 // Servo Motors position for Robot Arm home position
 void home(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
   delay(velocidad);
+
   // Servo Motor 1
   pca9685.setPWM(1, 0, posServo1);
   delay(velocidad);
+
   // Servo Motor 2
   pca9685.setPWM(2, 0, posServo2);
   delay(velocidad);
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
+
   // Servo Motor 3
   pca9685.setPWM(3, 0, posServo3);
   delay(velocidad);
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
@@ -54,17 +59,28 @@ void home(int posServo0, int posServo1, int posServo2, int posServo3, int posSer
 //================================
 // Position of the Servo Motors for the first movement of the Robot Arm
 void ready(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 295
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
   delay(velocidad);
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);  // 220
-  delay(velocidad);
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  // 300
-  delay(velocidad);
+
   // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);  // 300
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
@@ -73,20 +89,28 @@ void ready(int posServo0, int posServo1, int posServo2, int posServo3, int posSe
 //=======================================================
 // Position of the Servo Motors to prepare to pick up the cube
 void get_ready(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);  // 350
-  delay(velocidad);
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);  // 150
-  delay(velocidad);
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  // 415
-  delay(velocidad);
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 200
-  delay(velocidad);
   // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);  // 200
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
@@ -95,17 +119,28 @@ void get_ready(int posServo0, int posServo1, int posServo2, int posServo3, int p
 //===================================
 // Position of the Servo Motors to prepare for download the cube
 void prepare_download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 295
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
   delay(velocidad);
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);  // 220
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
   delay(velocidad);
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);  // 265
-  delay(velocidad);
+
   // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  // 300
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
@@ -114,6 +149,38 @@ void prepare_download_object(int posServo0, int posServo1, int posServo2, int po
 //=================================================
 // Position of the Servo Motors to pick up the cube
 void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+/*
+  // Servo Motor 5
+  //pca9685.setPWM(5, 0, posServo5);
+  // Loop for to move the Servo Motor 5 slowly  de 320 a 310
+  for (int pos = posServo5; pos < 400; pos += 1) {
+    pca9685.setPWM(5, 0, pos);
+    delay(2);
+  }
+  */
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo4);
+  delay(velocidad);
+  /*
   // Servo Motor 4
   pca9685.setPWM(4, 0, posServo4);  // 210
   delay(velocidad);
@@ -138,6 +205,7 @@ void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, 
     pca9685.setPWM(0, 0, pos);
     delay(10);
   }
+  */
 }
 
 //============================
@@ -145,75 +213,186 @@ void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, 
 //============================
 // Position of the Servo Motors to download the objet
 void download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);  // 210
-  delay(velocidad);
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);  // 175
-  delay(velocidad);
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  // 460
-  delay(velocidad);
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 195
-  delay(velocidad);
+ /* 
   // Servo Motor 0
   // Loop to open the clamp slowly de 166 a 200
   for (int pos = 166; pos < 200; pos += 1) {
     pca9685.setPWM(0, 0, pos);
     delay(10);
   }
+  */
+  
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
+  delay(velocidad);
 }
 
 //================================
 // fonction deplacement cube rouge
 //================================
 void deplacementCaseRed(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // deplacement a realiser
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
+  delay(velocidad);
 }
 
 //================================
 // fonction deplacement cube vert
 //================================
 void deplacementCaseGreen(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // deplacement a realiser
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
+  delay(velocidad);
 }
 
 //================================
 // fonction deplacement cube bleu
 //================================
 void deplacementCaseBlue(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // deplacement a realiser
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
+  delay(velocidad);
 }
 
 //================================
 // fonction deplacement cube jaune
 //================================
 void deplacementCaseYellow(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // deplacement a realiser
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
+  // Servo Motor 3
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
+
+  // Servo Motor 4
+  pca9685.setPWM(4, 0, posServo4);
+  delay(velocidad);
+
+  // Servo Motor 5
+  pca9685.setPWM(5, 0, posServo5);
+  delay(velocidad);
 }
 
 //==========================
 // fonction relacher du cube
 //==========================
 void exit_download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
+
+  // Servo Motor 0
+  pca9685.setPWM(0, 0, posServo0);
+  delay(velocidad);
+
+  // Servo Motor 1
+  pca9685.setPWM(1, 0, posServo1);
+  delay(velocidad);
+
+  // Servo Motor 2
+  pca9685.setPWM(2, 0, posServo2);
+  delay(velocidad);
+
   // Servo Motor 3
   // Loop to start slowly backing out the Robot Arm de 175 a 150
   for (int pos = 175; pos > 150; pos -= 1) {
     pca9685.setPWM(3, 0, pos);
     delay(10);
   }
+
   // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 295
+  pca9685.setPWM(4, 0, posServo4);
   delay(velocidad);
+
   // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);  // 265
-  delay(velocidad);
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  // 300
-  delay(velocidad);
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);  // 300
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
@@ -243,7 +422,35 @@ void setup() {
   CAN.onReceive(onReceive);
 
   // Servo Motors position for Robot Arm home position
-  home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREELBOW2, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);  // servo 0 , servo 1, ... servo 5
+  // servo 0 , servo 1, servo 2, servo 3, servo 4, servo 5
+  home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREELBOW2, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+  delay(1000);
+
+  // Position of the Servo Motors for the first movement of the Robot Arm
+  ready(320, 430, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+  delay(1000);
+
+  // Position of the Servo Motors to prepare to pick up the cube
+  get_ready(320, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+  delay(1000);
+
+  // Position of the Servo Motors to prepare for download the cube
+  prepare_download_object(310, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+  delay(1000);
+
+  // Position of the Servo Motors to pick up the cube
+  pick_up_object(310, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+  delay(1000);
+
+  // Position of the Servo Motors to download the objet
+  download_object(310, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+  delay(1000);
+/*
+  deplacementCaseRed(110, 300, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+  delay(1000);
+
+  exit_download_object(110, 300, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+  delay(1000);*/
 }
 
 //==================================
@@ -273,26 +480,26 @@ void loop() {
       Serial.println(id, HEX);
     }
     /*
-    ready();                      // Position of the Servo Motors for the first movement of the Robot Arm
-    delay(1000);
-    get_ready();                  // Position of the Servo Motors to prepare to pick up the cube
-    delay(1000);
-    pick_up_object();             // Position of the Servo Motors to pick up the cube
-    delay(1000);
-    prepare_download_object();    // Position of the Servo Motors to prepare for download the cube
-    delay(1000);
-    download_object();            // Position of the Servo Motors to download the objet
-    delay(1000);
-    if ( caractere == 'R') {
+      ready();                      // Position of the Servo Motors for the first movement of the Robot Arm
+      delay(1000);
+      get_ready();                  // Position of the Servo Motors to prepare to pick up the cube
+      delay(1000);
+      pick_up_object();             // Position of the Servo Motors to pick up the cube
+      delay(1000);
+      prepare_download_object();    // Position of the Servo Motors to prepare for download the cube
+      delay(1000);
+      download_object();            // Position of the Servo Motors to download the objet
+      delay(1000);
+      if ( caractere == 'R') {
       deplacementCaseRed();       // deplacement du cube rouge
-    } else if (caractere == 'G') {
+      } else if (caractere == 'G') {
       deplacementCaseGreen();     // deplacement du cube vert
-    } else if (caractere == 'B') {
+      } else if (caractere == 'B') {
       deplacementCaseBlue();      // deplacement du cube bleu
-    } else if (caratere == 'Y') {
+      } else if (caratere == 'Y') {
       deplacementCaseYellow();    // deplacement du cube jaune
-    }
-    exit_download_object();       // relache du cube
+      }
+      exit_download_object();       // relache du cube
     */
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
