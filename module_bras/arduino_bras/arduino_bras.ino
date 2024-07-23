@@ -32,324 +32,58 @@ void home(int posServo0, int posServo1, int posServo2, int posServo3, int posSer
   // Servo Motor 0
   pca9685.setPWM(0, 0, posServo0);
   delay(velocidad);
-
   // Servo Motor 1
   pca9685.setPWM(1, 0, posServo1);
   delay(velocidad);
-
   // Servo Motor 2
   pca9685.setPWM(2, 0, posServo2);
   delay(velocidad);
-
   // Servo Motor 3
   pca9685.setPWM(3, 0, posServo3);
   delay(velocidad);
-
   // Servo Motor 4
   pca9685.setPWM(4, 0, posServo4);
   delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//================================
-// fonction position ready du bras
-//================================
-// Position of the Servo Motors for the first movement of the Robot Arm
-void ready(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//=======================================================
-// fonction position ready du bras pour attrapper le cube
-//=======================================================
-// Position of the Servo Motors to prepare to pick up the cube
-void get_ready(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//===================================
-// fonction prepare attrapper le cube
-//===================================
-// Position of the Servo Motors to prepare for download the cube
-void prepare_download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//=================================================
-// fonction position du bras pour attrapper le cube
-//=================================================
-// Position of the Servo Motors to pick up the cube
-void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-
-}
-
-//============================
-// fonction attrapper le cube
-//============================
-// Position of the Servo Motors to download the objet
-void download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//================================
-// fonction deplacement cube rouge
-//================================
-void deplacementCaseRed(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//================================
-// fonction deplacement cube vert
-//================================
-void deplacementCaseGreen(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//================================
-// fonction deplacement cube bleu
-//================================
-void deplacementCaseBlue(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
-}
-
-//================================
-// fonction deplacement cube jaune
-//================================
-void deplacementCaseYellow(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-  // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
-  // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
   // Servo Motor 5
   pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
 }
 
 //==========================
-// fonction relacher du cube
+// fonction position du bras
 //==========================
-void exit_download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
-
+// Position of the Servo Motors for the movement of the Robot Arm
+void position(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
   // Servo Motor 0
-  pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-
+  if (posServo0 != 0) {
+    pca9685.setPWM(0, 0, posServo0);
+    delay(velocidad);
+  }
   // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
-  delay(velocidad);
-
+  if (posServo0 != 0) {
+    pca9685.setPWM(1, 0, posServo1);
+    delay(velocidad);
+  }
   // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);
-  delay(velocidad);
-
+  if (posServo0 != 0) {
+    pca9685.setPWM(2, 0, posServo2);
+    delay(velocidad);
+  }
   // Servo Motor 3
-  pca9685.setPWM(3, 0, posServo3);
-  delay(velocidad);
-
+  if (posServo0 != 0) {
+    pca9685.setPWM(3, 0, posServo3);
+    delay(velocidad);
+  }
   // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);
-  delay(velocidad);
-
+  if (posServo0 != 0) {
+    pca9685.setPWM(4, 0, posServo4);
+    delay(velocidad);
+  }
   // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo5);
-  delay(velocidad);
+  if (posServo0 != 0) {
+    pca9685.setPWM(5, 0, posServo5);
+    delay(velocidad);
+  }
 }
 
 //======
@@ -361,7 +95,7 @@ void setup() {
   while (!Serial)
     ;
 
-  Serial.println("Demarrage du distributeur");
+  Serial.println("Demarrage du bras");
 
   // demarrage pwm servo moteur
   pca9685.begin();
@@ -381,7 +115,6 @@ void setup() {
   // servo 0 , servo 1, servo 2, servo 3, servo 4, servo 5
   home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREELBOW2, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
   delay(50);
-
 }
 
 //==================================
@@ -399,10 +132,10 @@ void onReceive(int packetSize) {
 // loop
 //======
 void loop() {
-  
+  // pour tester la sequence
   //caractere = 'R';
   //id = 0x18;
-  
+
   // reception de la couleur du master id 0x18 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x18) {
     if (debug) {
@@ -416,82 +149,98 @@ void loop() {
       Serial.println(id, HEX);
     }
 
-
     // Position of the Servo Motors for the first movement of the Robot Arm
-    ready(320, NEUTRESHOULDER1, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+    // servo 0 et 3
+    position(320, 0, 0, 100, 0, 0);
     delay(50);
     // Position of the Servo Motors to prepare to pick up the cube
-    get_ready(320, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+    //servo 1 et 5
+    position(0, 350, 0, 0, 0, 320);
     delay(50);
 
     // Position of the Servo Motors to prepare for download the cube
-    prepare_download_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+    // servo 1
+    position(0, 280, 0, 0, 0, 0);
     delay(50);
 
     // Position of the Servo Motors to pick up the cube
-    pick_up_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+    // servo 5
+    position(0, 0, 0, 0, 0, 400);
     delay(50);
 
     // Position of the Servo Motors to download the objet
-    download_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+    // servo 1
+    position(0, 350, 0, 0, 0, 0);
     delay(50);
 
-    if ( caractere == 'R') {
+    if (caractere == 'R') {
       // Position of the Servo Motors deplacement
-      deplacementCaseRed(540, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      // servo 0
+      position(540, 0, 0, 0, 0, 0);
       delay(50);
 
       // Position of the Servo Motors to exit the objet
-      exit_download_object(540, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      // servo 1 et 5
+      position(0, 230, 0, 0, 0, 320);
       delay(50);
 
       // Position of the Servo Motors to prepare
-      deplacementCaseRed(540, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      // servo 1 et 5
+      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
       delay(50);
 
     } else if (caractere == 'G') {
       // Position of the Servo Motors deplacement
-      deplacementCaseRed(500, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      // servo 0
+      position(500, 0, 0, 0, 0, 0);
       delay(50);
 
       // Position of the Servo Motors to exit the objet
-      exit_download_object(500, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      // servo 1 et 5
+      position(0, 230, 0, 0, 0, 320);
       delay(50);
 
       // Position of the Servo Motors to prepare
-      deplacementCaseRed(500, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      // servo 1 et 5
+      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
       delay(50);
 
     } else if (caractere == 'B') {
       // Position of the Servo Motors deplacement
-      deplacementCaseRed(450, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      // servo 0
+      position(450, 0, 0, 0, 0, 0);
       delay(50);
 
       // Position of the Servo Motors to exit the objet
-      exit_download_object(450, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      // servo 1 et 5
+      position(0, 230, 0, 0, 0, 320);
       delay(50);
 
       // Position of the Servo Motors to prepare
-      deplacementCaseRed(450, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      // servo 1 et 5
+      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
       delay(50);
 
     } else if (caractere == 'Y') {
       // Position of the Servo Motors deplacement
-      deplacementCaseRed(400, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      // servo 0
+      position(400, 0, 0, 0, 0, 0);
       delay(50);
 
       // Position of the Servo Motors to exit the objet
-      exit_download_object(400, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      // servo 1 et 5
+      position(0, 230, 0, 0, 0, 320);
       delay(50);
 
       // Position of the Servo Motors to prepare
-      deplacementCaseRed(400, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      // servo 1 et 5
+      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
       delay(50);
-
     }
 
     // Position of the Servo Motors for the first movement of the Robot Arm
-    ready(320, NEUTRESHOULDER1, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+    // servo 1 et 4
+    position(0, NEUTRESHOULDER1, 0, 0, NEUTREWRISTPITCH4, 0);
     delay(50);
 
     caractere = '0';  // effacement du caratere apres lecture

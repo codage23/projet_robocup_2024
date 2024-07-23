@@ -64,10 +64,4 @@ int velocidad = 450;  // Velocidad du mouvement
 #define NEUTREGRIPPER5 420  // position neutre du servo  5
 #define MAXIGRIPPER5 480    // position maximum du servo 5
 
-/*
-// variables pour le test du servo moteur
-int neutre;  // position neutre
-int maxi;
-int mini;
-int servo;  // numero
-*/
+
