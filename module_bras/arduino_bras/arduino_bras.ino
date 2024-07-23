@@ -168,44 +168,11 @@ void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, 
   // Servo Motor 4
   pca9685.setPWM(4, 0, posServo4);
   delay(velocidad);
-/*
+
   // Servo Motor 5
-  //pca9685.setPWM(5, 0, posServo5);
-  // Loop for to move the Servo Motor 5 slowly  de 320 a 310
-  for (int pos = posServo5; pos < 400; pos += 1) {
-    pca9685.setPWM(5, 0, pos);
-    delay(2);
-  }
-  */
-  // Servo Motor 5
-  pca9685.setPWM(5, 0, posServo4);
+  pca9685.setPWM(5, 0, posServo5);
   delay(velocidad);
-  /*
-  // Servo Motor 4
-  pca9685.setPWM(4, 0, posServo4);  // 210
-  delay(velocidad);
-  // Servo Motor 2
-  pca9685.setPWM(2, 0, posServo2);  //405
-  delay(velocidad);
-  // Servo Motor 3
-  // Loop for to move the Servo Motor 3 slowly  de 150  a  180
-  for (int pos = 150; pos < 180; pos += 1) {
-    pca9685.setPWM(3, 0, pos);
-    delay(10);
-  }
-  // Servo Motor 2
-  // Loop for to move the Servo Motor 2 slowly  de 405 a 350
-  for (int pos = 405; pos > 350; pos -= 1) {
-    pca9685.setPWM(2, 0, pos);
-    delay(10);
-  }
-  // Servo Motor 0
-  // Loop to close the clamp slowly  de 200 a 166
-  for (int pos = 200; pos > 166; pos -= 1) {
-    pca9685.setPWM(0, 0, pos);
-    delay(10);
-  }
-  */
+
 }
 
 //============================
@@ -213,15 +180,7 @@ void pick_up_object(int posServo0, int posServo1, int posServo2, int posServo3, 
 //============================
 // Position of the Servo Motors to download the objet
 void download_object(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
- /* 
-  // Servo Motor 0
-  // Loop to open the clamp slowly de 166 a 200
-  for (int pos = 166; pos < 200; pos += 1) {
-    pca9685.setPWM(0, 0, pos);
-    delay(10);
-  }
-  */
-  
+
   // Servo Motor 0
   pca9685.setPWM(0, 0, posServo1);
   delay(velocidad);
@@ -381,11 +340,8 @@ void exit_download_object(int posServo0, int posServo1, int posServo2, int posSe
   delay(velocidad);
 
   // Servo Motor 3
-  // Loop to start slowly backing out the Robot Arm de 175 a 150
-  for (int pos = 175; pos > 150; pos -= 1) {
-    pca9685.setPWM(3, 0, pos);
-    delay(10);
-  }
+  pca9685.setPWM(3, 0, posServo3);
+  delay(velocidad);
 
   // Servo Motor 4
   pca9685.setPWM(4, 0, posServo4);
@@ -424,33 +380,8 @@ void setup() {
   // Servo Motors position for Robot Arm home position
   // servo 0 , servo 1, servo 2, servo 3, servo 4, servo 5
   home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREELBOW2, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
-  delay(1000);
+  delay(50);
 
-  // Position of the Servo Motors for the first movement of the Robot Arm
-  ready(320, 430, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
-  delay(1000);
-
-  // Position of the Servo Motors to prepare to pick up the cube
-  get_ready(320, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
-  delay(1000);
-
-  // Position of the Servo Motors to prepare for download the cube
-  prepare_download_object(310, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
-  delay(1000);
-
-  // Position of the Servo Motors to pick up the cube
-  pick_up_object(310, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
-  delay(1000);
-
-  // Position of the Servo Motors to download the objet
-  download_object(310, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
-  delay(1000);
-/*
-  deplacementCaseRed(110, 300, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
-  delay(1000);
-
-  exit_download_object(110, 300, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
-  delay(1000);*/
 }
 
 //==================================
@@ -463,10 +394,15 @@ void onReceive(int packetSize) {
   }
 }
 
+
 //======
 // loop
 //======
 void loop() {
+  
+  //caractere = 'R';
+  //id = 0x18;
+  
   // reception de la couleur du master id 0x18 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x18) {
     if (debug) {
@@ -479,28 +415,85 @@ void loop() {
       Serial.print("   id  ");
       Serial.println(id, HEX);
     }
-    /*
-      ready();                      // Position of the Servo Motors for the first movement of the Robot Arm
-      delay(1000);
-      get_ready();                  // Position of the Servo Motors to prepare to pick up the cube
-      delay(1000);
-      pick_up_object();             // Position of the Servo Motors to pick up the cube
-      delay(1000);
-      prepare_download_object();    // Position of the Servo Motors to prepare for download the cube
-      delay(1000);
-      download_object();            // Position of the Servo Motors to download the objet
-      delay(1000);
-      if ( caractere == 'R') {
-      deplacementCaseRed();       // deplacement du cube rouge
-      } else if (caractere == 'G') {
-      deplacementCaseGreen();     // deplacement du cube vert
-      } else if (caractere == 'B') {
-      deplacementCaseBlue();      // deplacement du cube bleu
-      } else if (caratere == 'Y') {
-      deplacementCaseYellow();    // deplacement du cube jaune
-      }
-      exit_download_object();       // relache du cube
-    */
+
+
+    // Position of the Servo Motors for the first movement of the Robot Arm
+    ready(320, NEUTRESHOULDER1, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+    delay(50);
+    // Position of the Servo Motors to prepare to pick up the cube
+    get_ready(320, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+    delay(50);
+
+    // Position of the Servo Motors to prepare for download the cube
+    prepare_download_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+    delay(50);
+
+    // Position of the Servo Motors to pick up the cube
+    pick_up_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+    delay(50);
+
+    // Position of the Servo Motors to download the objet
+    download_object(320, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+    delay(50);
+
+    if ( caractere == 'R') {
+      // Position of the Servo Motors deplacement
+      deplacementCaseRed(540, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      delay(50);
+
+      // Position of the Servo Motors to exit the objet
+      exit_download_object(540, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      delay(50);
+
+      // Position of the Servo Motors to prepare
+      deplacementCaseRed(540, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      delay(50);
+
+    } else if (caractere == 'G') {
+      // Position of the Servo Motors deplacement
+      deplacementCaseRed(500, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      delay(50);
+
+      // Position of the Servo Motors to exit the objet
+      exit_download_object(500, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      delay(50);
+
+      // Position of the Servo Motors to prepare
+      deplacementCaseRed(500, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      delay(50);
+
+    } else if (caractere == 'B') {
+      // Position of the Servo Motors deplacement
+      deplacementCaseRed(450, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      delay(50);
+
+      // Position of the Servo Motors to exit the objet
+      exit_download_object(450, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      delay(50);
+
+      // Position of the Servo Motors to prepare
+      deplacementCaseRed(450, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      delay(50);
+
+    } else if (caractere == 'Y') {
+      // Position of the Servo Motors deplacement
+      deplacementCaseRed(400, 280, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 400);
+      delay(50);
+
+      // Position of the Servo Motors to exit the objet
+      exit_download_object(400, 230, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, 320);
+      delay(50);
+
+      // Position of the Servo Motors to prepare
+      deplacementCaseRed(400, 350, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+      delay(50);
+
+    }
+
+    // Position of the Servo Motors for the first movement of the Robot Arm
+    ready(320, NEUTRESHOULDER1, NEUTREELBOW2, 100, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+    delay(50);
+
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
   }
