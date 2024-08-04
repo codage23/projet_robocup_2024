@@ -28,12 +28,9 @@ Adafruit_PWMServoDriver pca9685 = Adafruit_PWMServoDriver();
 // fonction repos du bras
 //=======================
 // Servo Motors position for Robot Arm home position
-void home(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
+void home(int posServo0, int posServo2, int posServo3, int posServo4, int posServo5) {
   // Servo Motor 0
   pca9685.setPWM(0, 0, posServo0);
-  delay(velocidad);
-  // Servo Motor 1
-  pca9685.setPWM(1, 0, posServo1);
   delay(velocidad);
   // Servo Motor 2
   pca9685.setPWM(2, 0, posServo2);
@@ -53,15 +50,10 @@ void home(int posServo0, int posServo1, int posServo2, int posServo3, int posSer
 // fonction position du bras
 //==========================
 // Position of the Servo Motors for the movement of the Robot Arm
-void position(int posServo0, int posServo1, int posServo2, int posServo3, int posServo4, int posServo5) {
+void position(int posServo0, int posServo2, int posServo3, int posServo4, int posServo5) {
   // Servo Motor 0
   if (posServo0 != 0) {
     pca9685.setPWM(0, 0, posServo0);
-    delay(velocidad);
-  }
-  // Servo Motor 1
-  if (posServo0 != 0) {
-    pca9685.setPWM(1, 0, posServo1);
     delay(velocidad);
   }
   // Servo Motor 2
@@ -113,7 +105,7 @@ void setup() {
 
   // Servo Motors position for Robot Arm home position
   // servo 0 , servo 1, servo 2, servo 3, servo 4, servo 5
-  home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREELBOW2, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
+  home(NEUTREWAIST0, NEUTRESHOULDER1, NEUTREWRISTROLL3, NEUTREWRISTPITCH4, NEUTREGRIPPER5);
   delay(50);
 }
 
@@ -133,8 +125,9 @@ void onReceive(int packetSize) {
 //======
 void loop() {
   // pour tester la sequence
-  //caractere = 'R';
-  //id = 0x18;
+  delay(2000);
+  caractere = 'R';
+  id = 0x18;
 
   // reception de la couleur du master id 0x18 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x18) {
@@ -150,98 +143,74 @@ void loop() {
     }
 
     // Position of the Servo Motors for the first movement of the Robot Arm
-    // servo 0 et 3
-    position(320, 0, 0, 100, 0, 0);
-    delay(50);
+    position(320, 340, 150, 400, 420);
     // Position of the Servo Motors to prepare to pick up the cube
-    //servo 1 et 5
-    position(0, 350, 0, 0, 0, 320);
-    delay(50);
-
+    position(320, 340, 150, 400, 320);
     // Position of the Servo Motors to prepare for download the cube
-    // servo 1
-    position(0, 280, 0, 0, 0, 0);
-    delay(50);
-
+    position(320, 280, 150, 400, 320);
     // Position of the Servo Motors to pick up the cube
-    // servo 5
-    position(0, 0, 0, 0, 0, 400);
-    delay(50);
-
+    position(320, 280, 150, 400, 400);
     // Position of the Servo Motors to download the objet
-    // servo 1
-    position(0, 350, 0, 0, 0, 0);
-    delay(50);
+    position(320, 340, 150, 400, 400);
 
     if (caractere == 'R') {
       // Position of the Servo Motors deplacement
-      // servo 0
-      position(540, 0, 0, 0, 0, 0);
-      delay(50);
-
+      position(540, 340, 150, 400, 400);
+      // rotation de la main
+      position(540, 340, 150, 500, 400);
+      position(540, 340, 150, 400, 400);
+      position(540, 340, 150, 300, 400);
+      position(540, 340, 150, 400, 400);
       // Position of the Servo Motors to exit the objet
-      // servo 1 et 5
-      position(0, 230, 0, 0, 0, 320);
-      delay(50);
-
+      position(540, 230, 150, 400, 320);
       // Position of the Servo Motors to prepare
-      // servo 1 et 5
-      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
-      delay(50);
+      position(540, 340, 150, 400, 320);
 
     } else if (caractere == 'G') {
       // Position of the Servo Motors deplacement
-      // servo 0
-      position(500, 0, 0, 0, 0, 0);
-      delay(50);
-
+      position(500, 340, 150, 400, 400);
+      // rotation de la main
+      position(500, 340, 150, 500, 400);
+      position(500, 340, 150, 400, 400);
+      position(500, 340, 150, 300, 400);
+      position(500, 340, 150, 400, 400);
       // Position of the Servo Motors to exit the objet
-      // servo 1 et 5
-      position(0, 230, 0, 0, 0, 320);
-      delay(50);
-
+      position(500, 230, 150, 400, 320);
       // Position of the Servo Motors to prepare
-      // servo 1 et 5
-      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
-      delay(50);
+      position(500, 340, 150, 400, 320);
+
 
     } else if (caractere == 'B') {
       // Position of the Servo Motors deplacement
-      // servo 0
-      position(450, 0, 0, 0, 0, 0);
-      delay(50);
-
+      position(450, 340, 150, 400, 400);
+      // rotation de la main
+      position(450, 340, 150, 500, 400);
+      position(450, 340, 150, 400, 400);
+      position(450, 340, 150, 300, 400);
+      position(450, 340, 150, 400, 400);
       // Position of the Servo Motors to exit the objet
-      // servo 1 et 5
-      position(0, 230, 0, 0, 0, 320);
-      delay(50);
-
+      position(450, 230, 150, 400, 320);
       // Position of the Servo Motors to prepare
-      // servo 1 et 5
-      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
-      delay(50);
+      position(450, 340, 150, 400, 320);
+
 
     } else if (caractere == 'Y') {
       // Position of the Servo Motors deplacement
-      // servo 0
-      position(400, 0, 0, 0, 0, 0);
-      delay(50);
-
+      position(400, 340, 150, 400, 400);
+      // rotation de la main
+      position(400, 340, 150, 500, 400);
+      position(400, 340, 150, 400, 400);
+      position(400, 340, 150, 300, 400);
+      position(400, 340, 150, 400, 400);
       // Position of the Servo Motors to exit the objet
-      // servo 1 et 5
-      position(0, 230, 0, 0, 0, 320);
-      delay(50);
-
+      position(400, 230, 150, 400, 320);
       // Position of the Servo Motors to prepare
-      // servo 1 et 5
-      position(0, 350, 0, 0, 0, NEUTREGRIPPER5);
-      delay(50);
+      position(400, 340, 150, 400, 320);
+
     }
 
     // Position of the Servo Motors for the first movement of the Robot Arm
-    // servo 1 et 4
-    position(0, NEUTRESHOULDER1, 0, 0, NEUTREWRISTPITCH4, 0);
-    delay(50);
+    position(320, 340, 300, 400, 420);
 
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture

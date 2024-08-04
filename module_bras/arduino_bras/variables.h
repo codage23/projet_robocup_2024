@@ -37,7 +37,7 @@ int id = 0x0;          // valeur hexa de l'identification id sur le can bus
 //=======
 #define SERVOMIN 100  // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX 500  // This is the 'maximum' pulse length count (out of 4096)
-int velocidad = 450;  // Velocidad du mouvement
+int velocidad = 350;  // Velocidad du mouvement
 
 // mini, neutre et maxi de tous les servos
 #define MINIWAIST0 100    // position minimum du servo 0  waist - taille
@@ -47,11 +47,11 @@ int velocidad = 450;  // Velocidad du mouvement
 #define MINISHOULDER1 160    // position minimum du servo 1  shoulder - epaule
 #define NEUTRESHOULDER1 340  // position neutre du servo  1
 #define MAXISHOULDER1 500    // position maximum du servo 1
-
+/*
 #define MINIELBOW2 160    // position minimum du servo 2  elbow - coude
 #define NEUTREELBOW2 310  // position neutre du servo  2
 #define MAXIELBOW2 470    // position maximum du servo 2
-
+*/
 #define MINIWRISTROLL3 120    // position minimum du servo 3  wrist roll - tour de poignet
 #define NEUTREWRISTROLL3 300  // position neutre du servo  3
 #define MAXIWRISTROLL3 480    // position maximum du servo 3
@@ -63,5 +63,3 @@ int velocidad = 450;  // Velocidad du mouvement
 #define MINIGRIPPER5 320    // position minimum du servo 5  gripper - pince
 #define NEUTREGRIPPER5 420  // position neutre du servo  5
 #define MAXIGRIPPER5 480    // position maximum du servo 5
-
-
