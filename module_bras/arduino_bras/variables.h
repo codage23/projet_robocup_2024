@@ -9,6 +9,7 @@
 //========================================================
 #define TEST 0   // if 1 true,  0 false
 #define debug 1  // for use Display log message if True
+bool bras = 1;  // 1 libre, 0 occupe
 
 //==========================================
 // Affectation des broches de l'arduino uno
@@ -29,7 +30,8 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 // Variables
 //==========
-char caractere = '0';  // lecture can
+char caract = '0';  // lecture can
+char caractere = '0';  // caractere
 int id = 0x0;          // valeur hexa de l'identification id sur le can bus
 
 //=======
@@ -57,7 +59,7 @@ int velocidad = 350;  // Velocidad du mouvement
 #define MAXIWRISTROLL3 480    // position maximum du servo 3
 
 #define MINIWRISTPITCH4 150    // position minimum du servo 4  wrist pitch - pas du poignet
-#define NEUTREWRISTPITCH4 400  // position neutre du servo  4
+#define NEUTREWRISTPITCH4 420  // position neutre du servo  4
 #define MAXIWRISTPITCH4 650    // position maximum du servo 4
 
 #define MINIGRIPPER5 320    // position minimum du servo 5  gripper - pince
