@@ -126,7 +126,7 @@ void onReceive(int packetSize) {
 void loop() {
   // pour tester la sequence
   //delay(2000);
-  //caractere = 'R';
+  //caract = 'R';
   //id = 0x18;
   caractere = caract;
 
@@ -147,13 +147,13 @@ void loop() {
     // Position of the Servo Motors for the first movement of the Robot Arm
     position(320, 340, 150, 420, 420);
     // Position of the Servo Motors to prepare to pick up the cube
-    position(320, 340, 150, 420, 300);
+    position(100, 340, 150, 420, 300);
     // Position of the Servo Motors to prepare for download the cube
-    position(320, 250, 150, 420, 300);
+    position(100, 250, 150, 420, 300);
     // Position of the Servo Motors to pick up the cube
-    position(320, 250, 150, 420, 400);
+    position(100, 250, 150, 420, 400);
     // Position of the Servo Motors to download the objet
-    position(320, 340, 150, 420, 400);
+    position(100, 340, 150, 420, 400);
 
     Serial.println(caractere);
 
@@ -177,18 +177,18 @@ void loop() {
 
     } else if (caractere == 'G') {
       // Position of the Servo Motors deplacement
-      position(500, 340, 150, 450, 400);
+      position(480, 340, 150, 450, 400);
       // rotation de la main
       velocidad = 80;
-      position(500, 340, 150, 500, 400);
-      position(500, 340, 150, 400, 400);
-      position(500, 340, 150, 300, 400);
-      position(500, 340, 150, 400, 400);
+      position(480, 340, 150, 500, 400);
+      position(480, 340, 150, 400, 400);
+      position(480, 340, 150, 300, 400);
+      position(480, 340, 150, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(500, 230, 150, 400, 300);
+      position(480, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
-      position(500, 340, 150, 420, 300);
+      position(480, 340, 150, 420, 300);
 
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
@@ -198,33 +198,33 @@ void loop() {
       position(450, 340, 150, 400, 400);
       // rotation de la main
       velocidad = 80;
-      position(450, 340, 150, 500, 400);
-      position(450, 340, 150, 400, 400);
-      position(450, 340, 150, 300, 400);
-      position(450, 340, 150, 400, 400);
+      position(420, 340, 150, 500, 400);
+      position(420, 340, 150, 400, 400);
+      position(420, 340, 150, 300, 400);
+      position(420, 340, 150, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(450, 230, 150, 400, 300);
+      position(420, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
-      position(450, 340, 150, 420, 300);
+      position(420, 340, 150, 420, 300);
 
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
 
     } else if (caractere == 'Y') {
       // Position of the Servo Motors deplacement
-      position(400, 340, 150, 400, 400);
+      position(360, 340, 150, 400, 400);
       // rotation de la main
       velocidad = 80;
-      position(400, 340, 150, 500, 400);
-      position(400, 340, 150, 400, 400);
-      position(400, 340, 150, 300, 400);
-      position(400, 340, 150, 400, 400);
+      position(360, 340, 150, 500, 400);
+      position(360, 340, 150, 400, 400);
+      position(360, 340, 150, 300, 400);
+      position(360, 340, 150, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(400, 230, 150, 400, 300);
+      position(360, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
-      position(400, 340, 150, 420, 300);
+      position(360, 340, 150, 420, 300);
 
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
