@@ -5,6 +5,7 @@
     https://tutorial45.com/mcp2515-arduino-project-can-arduino/
     https://github.com/sandeepmistry/arduino-CAN/tree/master
     https://github.com/gewisser/GyverOLEDMenu
+    https://lastminuteengineers.com/mcp2515-can-module-arduino-tutorial/
 ***************************************************************/
 
 //=============================
