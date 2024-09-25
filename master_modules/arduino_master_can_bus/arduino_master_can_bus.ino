@@ -49,6 +49,8 @@ void setup() {
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
+
+
 }
 
 //==================================
@@ -59,6 +61,15 @@ void onReceive(int packetSize) {
     caractere = (char)CAN.read();  // lecture du bus can dans la variable caractere
     id = CAN.packetId();           // id du message can  dans la variable id
   }
+}
+
+//============================
+//  CAN transmission caractere
+//============================
+void transmission(int id, char caratere) {
+  CAN.beginPacket(id);
+  CAN.write(caractere);
+  CAN.endPacket();      // envoi sur le bus can
 }
 
 //========================
@@ -102,12 +113,27 @@ void loop() {
   // id 12 : convoyeur  A P
   // id 13 :
   // id 14 : distributeur de cube  L
-  // id 15 : 
+  // id 15 :
   // id 16 : detection de la couleur du cube avec le portique n1  R G B Y
   // id 17 : panneau d'affichage  R G B Y  E
   // id 18 : bras articule  R G B Y
   // id 19 : detection de la couleur du cube avec le portique n2  R G B Y
 
+  //================================
+  // attendre la dispo du bras idx18
+  //================================
+  while (caractere != 'O' and id != 0x18  and bras_dispo != 1) {
+    transmission (18, 'D'); // demande si bras dispo
+    bras_dispo = 0;
+    delay (1000);
+    
+  }
+  bras_dispo = 1;
+  if (bras_dispo == 1) {
+    transmission (17, 'E'); // extinction afficheur
+    transmission (11, 'D'); // démarage convoyeur
+  }
+  
 
   //================================================
   // reception du portique id 0x16 - couleur du cube
@@ -133,9 +159,8 @@ void loop() {
     receive(caractere, id, 2);  // affichage du code recu sur la ligne n
 
     id = 0x17;
-    CAN.beginPacket(id);   // id 0x17 pour envoyer la couleur a l'affichage
-    CAN.write(caractere);  // cube de la couleur
-    CAN.endPacket();       // envoi sur le bus can
+
+    transmission(id, caractere); // id 0x17 pour envoyer la couleur a l'affichage
 
     transmit(caractere, id, 4);  // affichage du code transmis sur la ligne n
 
@@ -147,9 +172,7 @@ void loop() {
     }
 
     id = 0x18;
-    CAN.beginPacket(id);   // id 0x18 pour envoyer la couleur au bras
-    CAN.write(caractere);  // cube de la couleur
-    CAN.endPacket();       // envoi sur le bus can
+    transmission(id, caractere); // id 0x18 pour envoyer la couleur au bras
 
     transmit(caractere, id, 5);  // affichage du code transmis sur la ligne n
 
@@ -162,9 +185,7 @@ void loop() {
 
     id = 0x14;
     caractere = 'L';
-    CAN.beginPacket(id);   // id 0x14 pour demander au distributeur de lache un cube
-    CAN.write(caractere);  // caractere L
-    CAN.endPacket();       // envoi sur le bus can
+    transmission(id, caractere);// id 0x14 pour demander au distributeur de lache un cube
 
     transmit(caractere, id, 6);  // affichage du code transmis sur la ligne n
 
@@ -180,10 +201,10 @@ void loop() {
   }
 
   /*
-  //================================================
-  // reception du portique id 0x16 - couleur du cube
-  //================================================
-  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y')  and (id == 0x19)) { // le portique a deux detecteurs id 16 et id 19
+    //================================================
+    // reception du portique id 0x16 - couleur du cube
+    //================================================
+    if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y')  and (id == 0x19)) { // le portique a deux detecteurs id 16 et id 19
     clearLigne(2);
     clearLigne(4);
     clearLigne(5);
@@ -203,7 +224,7 @@ void loop() {
 
     id = 0x17;
     CAN.beginPacket(id);    // id 0x17 pour envoyer la couleur a l'affichage
-    CAN.write(caractere);   // cube de la couleur 
+    CAN.write(caractere);   // cube de la couleur
     CAN.endPacket();        // envoi sur le bus can
 
     transmit(caractere, id, 4);  // affichage du code transmis sur la ligne n
@@ -229,7 +250,7 @@ void loop() {
     }
     caractere = '0';        // effacement du caratere apres lecture
     id = 0x0;               // effacement de la variable id apres lecture
-  }
+    }
   */
 
   //=================================================
@@ -253,9 +274,8 @@ void loop() {
 
     id = 0x11;
     caractere = 'S';      // objet present sur le convoyeur commande stop S
-    CAN.beginPacket(id);  // id 0x11 pour envoyer le stop pour le moteur du convoyeur
-    CAN.write(caractere);
-    CAN.endPacket();  // envoi sur le bus can
+    transmission(id, caractere);// id 0x11 pour envoyer le stop pour le moteur du convoyeur
+
 
     transmit(caractere, id, 4);  // affichage du code transmis sur la ligne n
 
@@ -267,12 +287,12 @@ void loop() {
     }
 
     /*
-    id = 0X18;
-    CAN.beginPacket(id);    // id 0x18 demande au bras si le bras est dispo
-    CAN.write('D');         // caractere de disponibilite
-    CAN.endPacket();        // envoi sur le bus can
+      id = 0X18;
+      CAN.beginPacket(id);    // id 0x18 demande au bras si le bras est dispo
+      CAN.write('D');         // caractere de disponibilite
+      CAN.endPacket();        // envoi sur le bus can
 
-    transmit(caractere, id, 5);  // affichage du code transmis sur la ligne n
+      transmit(caractere, id, 5);  // affichage du code transmis sur la ligne n
     */
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
@@ -299,9 +319,10 @@ void loop() {
 
     id = 0x11;
     caractere = 'D';      // objet absent sur le convoyeur commande demarrage D
-    CAN.beginPacket(id);  // id 0x11 pour envoyer le demarrage du moteur du convoyeur
-    CAN.write(caractere);
-    CAN.endPacket();  // envoi sur le bus can
+    transmission(id, caractere);// id 0x11 pour envoyer le demarrage du moteur du convoyeur
+    //CAN.beginPacket(id);  // id 0x11 pour envoyer le demarrage du moteur du convoyeur
+    //CAN.write(caractere);
+    //CAN.endPacket();  // envoi sur le bus can
 
     transmit(caractere, id, 2);  // affichage du code transmis sur la ligne n
 
@@ -314,9 +335,10 @@ void loop() {
 
     id = 0x17;
     caractere = 'E';      // effacement du tableau
-    CAN.beginPacket(id);  // id 0x17 pour effacer l'affichage
-    CAN.write(caractere);
-    CAN.endPacket();  // envoi sur le bus can
+    transmission(id, caractere);// id 0x17 pour effacer l'affichage
+    //CAN.beginPacket(id);  // id 0x17 pour effacer l'affichage
+    //CAN.write(caractere);
+    //CAN.endPacket();  // envoi sur le bus can
 
     transmit(caractere, id, 4);  // affichage du code transmis sur la ligne n
 
