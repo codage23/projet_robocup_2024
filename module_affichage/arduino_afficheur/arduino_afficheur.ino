@@ -60,7 +60,9 @@ void setup() {
 */
   // effacement du tableau de leds 256
   for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CRGB::Black;
+    leds[i] = CRGB::Red
+    
+    ;
     //delay(100);
   }
   FastLED.show();
