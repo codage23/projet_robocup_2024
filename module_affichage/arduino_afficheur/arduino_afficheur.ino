@@ -1,4 +1,4 @@
-/***************************************************************
+/***********************************************************************************************
     projet robocup 2024
     module afficheur
     mjc fablab atelier codage 2023 2024
@@ -7,8 +7,8 @@
     https://github.com/Jorgen-VikingGod/LEDMatrix
     https://electroniqueamateur.blogspot.com/2021/03/ecrire-des-nombres-sur-une-matrice-de.html
     https://electroniqueamateur.blogspot.com/2020/05/matrice-de-leds-rgb-16-x-16-ws2812b-et.html
-    * https://www.instructables.com/16x16-RGB-LED-Panel-Arduino-Projects/
-***************************************************************/
+    https://www.instructables.com/16x16-RGB-LED-Panel-Arduino-Projects/
+*************************************************************************************************/
 
 //=============================
 // inclusion des bibliothèques
@@ -16,8 +16,8 @@
 #include <CAN.h>        // pour la bibliothèque CAN
 #include <SPI.h>        // bus spi
 #include "variables.h"  // fichier variables
-#include <FastLED.h>    //https://github.com/FastLED/FastLED
-#include <LEDMatrix.h>  //https://github.com/Jorgen-VikingGod/LEDMatrix
+#include <FastLED.h>    // https://github.com/FastLED/FastLED
+#include <LEDMatrix.h>  // https://github.com/Jorgen-VikingGod/LEDMatrix
 
 
 CRGB leds[NUM_LEDS];  // creation d'un objet leds avec la bibliotheque fastled
@@ -49,10 +49,10 @@ void setup() {
     Serial.println("Demarrage de l'afficheur");
   }
 
-  FastLED.addLeds<CHIPSET , DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(10); //Number 0-255
+  FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
+  FastLED.setBrightness(10);                                                 // Number 0-255
   FastLED.clear(true);
-/*
+  /*
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalSMD5050);
   FastLED.setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(50);
@@ -60,10 +60,8 @@ void setup() {
 */
   // effacement du tableau de leds 256
   for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CRGB::Red
-    
-    ;
-    //delay(100);
+    leds[i] = CRGB::Red;
+    delay(1);
   }
   FastLED.show();
 
@@ -91,18 +89,21 @@ void loop() {
       // affichage de la couleur rouge
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Red;
+        delay(1);
         FastLED.show();
       }
     } else if (caractere == 'G') {
       // affichage de la couleur verte
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Green;
+        delay(1);
         FastLED.show();
       }
     } else if (caractere == 'B') {
       // affichage de la couleur bleue
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Blue;
+        delay(1);
         FastLED.show();
       }
     } else if (caractere == 'Y') {
@@ -110,6 +111,7 @@ void loop() {
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Yellow;
         FastLED.show();
+        delay(1);
       }
     }
 
@@ -131,7 +133,7 @@ void loop() {
     // effacement du tableau de leds 256
     for (int i = 0; i < NUM_LEDS; i++) {
       leds[i] = CRGB::Black;
-      //delay(100);
+      delay(1);
     }
     FastLED.show();
   }
