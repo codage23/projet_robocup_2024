@@ -14,11 +14,10 @@
 #include "variables.h"  // fichier variables
 #include <Servo.h>
 
-//==============
-// objet servo01
-//==============
-//Servo servo01; //Distrib
-Servo monServo;  // on crée l'objet monServo
+//============
+// objet servo
+//============
+Servo monServo;  // on crée l'objet monServo avec la bibiltheque Servo
 
 //======
 // setup
@@ -27,16 +26,12 @@ void setup() {
   Serial.begin(9600);
   while (!Serial)
     ;
-
   Serial.println("Demarrage du distributeur");
 
-  //servo01.attach(DISTRIB);
-  //servo1PPos = PP_DISTRIB;  //  initial position
-  //servo01.write(servo1PPos);
-  monServo.attach(5); // on définit le Pin utilisé par le servomoteur
-  int position = 0;
-             monServo.write(position);  // le bras du servomoteur prend la position de la variable position
-  delay(3000);  // on attend 15 millisecondes
+  monServo.attach(5);        // on définit le Pin utilisé par le servomoteur
+  int position = 0;          // on positionne le servo a zero avec la variable position
+  monServo.write(position);  // le bras du servomoteur prend la position de la variable position
+  delay(2000);
 
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
@@ -60,38 +55,30 @@ void onReceive(int packetSize) {
 }
 
 void libererCube() {
-  //delay(1000);
-  //for (int i = 100; i > 1; i--) {
-  // int i = 500 ;  // 50 tourne droite et 500 tourne gauche tourne gauche liberer cube
-  //servo01.write(i);
-  // Serial.print("Angle:180  ");
-  //Serial.println(i);
-  // }
-  delay(0);
+  delay(100);
 
-
-
-  for (int position = 0; position <= 180; position ++) { // on crée une variable position qui prend des valeurs entre 0 à 180 degrés
-    monServo.write(position);  // le bras du servomoteur prend la position de la variable position
-    delay(5);  // on attend 15 millisecondes
+  for (int position = 0; position <= 180; position++) {  // on crée une variable position qui prend des valeurs entre 0 à 180 degrés
+    monServo.write(position);                            // le bras du servomoteur prend la position de la variable position
+    delay(5);                                            // on attend 15 millisecondes
   }
 
-  for (int position = 180; position >= 0; position --) { // cette fois la variable position passe de 180 à 0°
-    monServo.write(position);  // le bras du servomoteur prend la position de la variable position
-    delay(5);  // le bras du servomoteur prend la position de la variable position
+  for (int position = 180; position >= 0; position--) {  // cette fois la variable position passe de 180 à 0°
+    monServo.write(position);                            // le bras du servomoteur prend la position de la variable position
+    delay(5);                                            // le bras du servomoteur prend la position de la variable position
   }
-
-
 }
 
 //======
 // loop
 //======
 void loop() {
+
+  libererCube();  // pour tester la fonction
+
   // reception commande L du master id 0x14 - liberer un cube
   if (caractere == 'L' and id == 0x14) {
 
-    libererCube(); //  fonction liberer le cube
+    libererCube();  //  fonction liberer le cube
 
     if (debug) {
       Serial.print("caractere recu : liberer un cube :  ");
@@ -99,9 +86,7 @@ void loop() {
       Serial.print("   id  ");
       Serial.println(id, HEX);
     }
-    caractere = '0';        // effacement du caratere apres lecture
-    id = 0x0;               // effacement de la variable id apres lecture
+    caractere = '0';  // effacement du caratere apres lecture
+    id = 0x0;         // effacement de la variable id apres lecture
   }
-  libererCube();
-
 }
