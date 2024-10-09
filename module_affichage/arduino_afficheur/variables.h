@@ -34,7 +34,8 @@ int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 // afficheur
 //==========
 // si debug activé alors la memoire le l'arduino est trop petite , il faut mettre un seul panneau donc 256 leds
-#define NUM_LEDS 208
+#define NUM_LEDS 256// ----- Allumer une LED en particulier ------------------------------
+
 
 // nombre de leds par panneau 256 leds 16x16
 #define DATA_PIN_ARDUINO 9      // broche arduino

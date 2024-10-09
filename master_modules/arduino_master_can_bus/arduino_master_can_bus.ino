@@ -50,9 +50,9 @@ void setup() {
   CAN.onReceive(onReceive);
 }
 
-//==================================
-//  CAN reception suite interruption
-//==================================
+//============================================
+//  CAN reception caractere suite interruption
+//============================================
 void onReceive(int packetSize) {
   while (CAN.available()) {
     caractere = (char)CAN.read();  // lecture du bus can dans la variable caractere
@@ -62,15 +62,6 @@ void onReceive(int packetSize) {
   if (id == 0x18 and caractere == 'O') {
     flag_bras = 1;  // flag mis à 1 suite à la dispo du bras
   }
-}
-
-//============================
-//  CAN transmission caractere
-//============================
-void transmission(int id, char caratere) {
-  CAN.beginPacket(id);
-  CAN.write(caractere);
-  CAN.endPacket();  // envoi sur le bus can
 }
 
 //========================
@@ -112,37 +103,78 @@ void loop() {
   // id 18 : bras articule  (Red Green Blue Yellow)
   // id 19 : detection de la couleur du cube avec le portique n°2  (Red Green Blue Yellow Non_reconnu)
 
-  // attente de la disponibilite du bras
-  if (flag_bras == 0) {
-    transmission(18, 'D');  // demande si bras dispo (reponse dans la routine onReceive)
+  flag_bras = 1;  // pour les tests
+
+  if (flag_bras == 0) {  // attente de la disponibilite du bras
+    // effacement des lignes de l'ecran du master
+    clearLigne(2);
+    clearLigne(4);
+    clearLigne(6);
+    id = 0x18;
+    caractere = 'D';
+    CAN.beginPacket(id);
+    CAN.write(caractere);
+    CAN.endPacket();                       // envoi sur le bus can de la demande de disponibilte du bras (reponse dans la routine onReceive)
+    affichage_ecran(0, caractere, id, 2);  // affichage du code transmis (0) sur la ligne n
 
   } else if (flag_bras == 1) {  // bras dispo
+    // effacement des lignes de l'ecran du master
+    clearLigne(2);
+    clearLigne(4);
+    clearLigne(6);
 
     if (flag_extinction != 1) {
-      transmission(17, 'E');  // extinction afficheur
-      flag_extinction = 1;    // pour envoi une seul fois l'extinction de l'afficheur
+      id = 0x17;
+      caractere = 'E';
+      CAN.beginPacket(id);
+      CAN.write(caractere);
+      CAN.endPacket();                       // envoi sur le bus can de l'extinction de l'affichage
+      flag_extinction = 1;                   // pour envoi une seul fois l'extinction de l'afficheur
+      affichage_ecran(0, caractere, id, 2);  // affichage du code transmis (0) sur la ligne n
+      if (debug) {
+        Serial.print("commande effacement de l'affciheur E : ");
+        Serial.print(caractere);
+        Serial.print("   id : ");
+        Serial.println(id, HEX);
+      }
     }
 
     if (flag_demarrage != 1) {
-      transmission(11, 'D');  // démarrage convoyeur
-      flag_demarrage = 1;     // pour envoi une seul fois le démarrage du convoyeur
+      id = 0x11;
+      caractere = 'D';
+      CAN.beginPacket(id);
+      CAN.write(caractere);
+      CAN.endPacket();                       // envoi sur le bus can du demarrage du convoyeur
+      flag_demarrage = 1;                    // pour envoi une seul fois le démarrage du convoyeur
+      affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
+      if (debug) {
+        Serial.print("commande demarrage du convoyeur D : ");
+        Serial.print(caractere);
+        Serial.print("   id : ");
+        Serial.println(id, HEX);
+      }
     }
 
     delay(1000);
-    if (flag_bras == 1 and flag_lache != 1) {
-      transmission(14, 'L');  // lache cube
-      flag_lache = 1;         // pour lache un seul cube
+    if (flag_lache != 1) {
+      id = 0x14;
+      caractere = 'L';
+      CAN.beginPacket(id);
+      CAN.write(caractere);
+      CAN.endPacket();                       // envoi sur le bus can du lache d'un cube
+      flag_lache = 1;                        // pour lache un seul cube
+      affichage_ecran(0, caractere, id, 6);  // affichage du code transmis (0) sur la ligne n
+      if (debug) {
+        Serial.print("commande lache d'un cube L : ");
+        Serial.print(caractere);
+        Serial.print("   id : ");
+        Serial.println(id, HEX);
+      }
     }
 
     // reception du portique id 0x16 - couleur du cube
     if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x16)) {  // le portique a deux detecteurs id 16 et id 19
-
-      // effacement des lignes de l'ecran du master
-      clearLigne(2);
-      clearLigne(4);
-      clearLigne(5);
-      clearLigne(6);
-
+      couleur = caractere;                                                                                  //sauvegarde du caractere couleur dans la variable couleur
       if (debug) {
         Serial.print("caractere recu : couleur cube ");
         if (caractere == 'R') Serial.print("red : ");
@@ -154,47 +186,38 @@ void loop() {
         Serial.println(id, HEX);
       }
       affichage_ecran(1, caractere, id, 2);  // affichage du code recu (1) sur la ligne n
-
-      id = 17;
-      transmission(id, caractere);           // id 0x17 pour envoyer la couleur a l'affichage
+      id = 0x17;
+      CAN.beginPacket(id);
+      CAN.write(caractere);
+      CAN.endPacket();                       // envoi sur le bus can de la couleur a l'afficheur
       affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
-
+      clearLigne(6);
       if (debug) {
         Serial.print("envoi de la couleur a l'afficheur : ");
         Serial.print(caractere);
         Serial.print("   id : ");
         Serial.println(id, HEX);
       }
-
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
     }
 
     // reception du convoyeur id 0x12 - objet present P
-
     if (caractere == 'P' and id == 0x12) {
-
-      clearLigne(2);
-      clearLigne(4);
-      clearLigne(5);
-      clearLigne(6);
-
       if (debug) {
         Serial.print("caractere recu : objet present : ");
         Serial.print(caractere);
         Serial.print("   id : ");
         Serial.println(id, HEX);
       }
-
       affichage_ecran(1, caractere, id, 2);  // affichage du code recu (1) sur la ligne n
 
       id = 0x11;
-      caractere = 'S';              // objet present sur le convoyeur commande stop S
-      transmission(id, caractere);  // id 0x11 pour envoyer le stop pour le moteur du convoyeur
-
-
+      caractere = 'S';
+      CAN.beginPacket(id);
+      CAN.write(caractere);
+      CAN.endPacket();                       // envoi sur le bus can  objet present sur le convoyeur commande stop S
       affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
-
       if (debug) {
         Serial.print("objet present sur le convoyeur envoi commande stop S : ");
         Serial.print(caractere);
@@ -202,54 +225,43 @@ void loop() {
         Serial.println(id, HEX);
       }
 
+      id = 0x18;
+      CAN.beginPacket(id);
+      CAN.write(couleur);
+      CAN.endPacket();                       // envoi au bras, la couleur sur le bus can
+      affichage_ecran(0, couleur, id, 4);  // affichage du code transmis (0) sur la ligne n
+      clearLigne(6);
+      if (debug) {
+        Serial.print("envoi de la couleur au bras : ");
+        Serial.print(couleur);
+        Serial.print("   id : ");
+        Serial.println(id, HEX);
+      }
+
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
+      couleur = '0';    // effacement de la sauvegarde de la couleur
     }
 
     // reception du convoyeur id 0x12 - objet absent A
 
-    if (caractere == 'A' and id == 0x12) {
-
-      clearLigne(2);
-      clearLigne(4);
-      clearLigne(5);
-      clearLigne(6);
-
+    if (caractere == 'A' and id == 0x12) {  // caractere recu  absent sur le convoyeur
       if (debug) {
         Serial.print("caractere recu : objet absent  : ");
         Serial.print(caractere);
         Serial.print("   id : ");
         Serial.println(id, HEX);
       }
-
       affichage_ecran(1, caractere, id, 2);  // affichage du code recu (1) sur la ligne n
-
-      id = 0x11;
-      caractere = 'D';                       // objet absent sur le convoyeur commande demarrage D
-      transmission(id, caractere);           // id 0x11 pour envoyer le demarrage du moteur du convoyeur
-      affichage_ecran(0, caractere, id, 2);  // affichage du code transmis (0) sur la ligne n
-
-      if (debug) {
-        Serial.print("objet absent sur le convoyeur envoi commande demarrage D : ");
-        Serial.print(caractere);
-        Serial.print("   id : ");
-        Serial.println(id, HEX);
-      }
-
-      id = 0x17;
-      caractere = 'E';              // effacement du tableau
-      transmission(id, caractere);  // id 0x17 pour effacer l'affichage
-
-      affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
-
-      if (debug) {
-        Serial.print("effacement du tableau envoi commande effacement E : ");
-        Serial.print(caractere);
-        Serial.print("   id : ");
-        Serial.println(id, HEX);
-      }
+      clearLigne(4);
+      clearLigne(6);
 
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture
+      flag_bras = 0;
+      flag_extinction = 0;
+      flag_demarrage = 0;
+      flag_lache = 0;
     }
   }
+}

@@ -31,7 +31,8 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 char caractere = '0';  // lecture can
 int id = 0x0;          // valeur hexa de l'identification id sur le can bus
-int flag_bras = 0;
-int flag_extinction = 0;
-int flag_demarrage = 0;
-int flag_lache = 0;
+int flag_bras = 0;     // flag bras
+int flag_extinction = 0;  // flag extinction
+int flag_demarrage = 0;   // flag demarrage
+int flag_lache = 0;       // flag lache
+char couleur = '0';     // sauvegarde de la couleur

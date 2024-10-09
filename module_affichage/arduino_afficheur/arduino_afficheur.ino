@@ -52,19 +52,14 @@ void setup() {
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
   FastLED.setBrightness(10);                                                 // Number 0-255
   FastLED.clear(true);
-  /*
-  FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalSMD5050);
-  FastLED.setCorrection(TypicalLEDStrip);
-  FastLED.setBrightness(50);
-  FastLED.clear(true);  // on éteint toutes les LEDs
-*/
+
   // effacement du tableau de leds 256
   for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = CRGB::Red;
+    leds[i] = CRGB::Black;
     delay(1);
+    FastLED.show();
   }
-  FastLED.show();
-
+ /*
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
     if (debug) {
@@ -76,20 +71,22 @@ void setup() {
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
+  */
 }
 
 //======
 // loop
 //======
 void loop() {
-
+caractere = 'Y';
+id = 0x17;
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
     if (caractere == 'R') {
       // affichage de la couleur rouge
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Red;
-        delay(1);
+        delay(10);
         FastLED.show();
       }
     } else if (caractere == 'G') {
@@ -129,6 +126,10 @@ void loop() {
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
   }
+caractere = 'E';
+id = 0x17;
+  delay (2000);
+ 
   if ((caractere == 'E') and id == 0x17) {  // effacement afficheur id 0x17
     // effacement du tableau de leds 256
     for (int i = 0; i < NUM_LEDS; i++) {
@@ -193,22 +194,7 @@ void loop() {
 
   FastLED.clear(true);  // on éteint toutes les LEDs
 
-  // dessiner un carré (vide) ---------------------------
 
-  leds.DrawRectangle(6, 6, 9, 9, (CRGB::Red));
-  FastLED.show();
-  delay(pause);
-  leds.DrawRectangle(5, 5, 10, 10, (CRGB::Yellow));
-  FastLED.show();
-  delay(pause);
-  leds.DrawRectangle(4, 4, 11, 11, (CRGB::Lime));
-  FastLED.show();
-  delay(pause);
-  leds.DrawRectangle(3, 3, 12, 12, (CRGB::Cyan));
-  FastLED.show();
-  delay(pause);
-
-  FastLED.clear(true);  // on éteint toutes les LEDs
 
   // -- dessiner un cercle plein ------------------------
 
