@@ -114,7 +114,7 @@ void setup() {
 //==================================
 void onReceive(int packetSize) {
   while (CAN.available()) {
-    caract = (char)CAN.read();  // lecture du bus can dans la variable caractere
+    caractere = (char)CAN.read();  // lecture du bus can dans la variable caractere
     id = CAN.packetId();           // id du message can  dans la variable id
   }
 }
@@ -128,11 +128,24 @@ void loop() {
   //delay(2000);
   //caract = 'R';
   //id = 0x18;
-  caractere = caract;
+
+  if (caractere == 'D' and id == 0x18) {  // demande si le bras est disponible
+    id = 0x18;
+    if (flag_bras == 1) {
+      caractere = 'O';
+    } else {
+      caractere = 'N';
+    }
+    CAN.beginPacket(id);
+    CAN.write(caractere);
+    CAN.endPacket();  // envoi sur le bus can
+  }
 
   // reception de la couleur du master id 0x18 - couleur du cube
-  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x18) {
-    bras = 0; // bras occupe
+  if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x18) and (flag_bras == 1)) {
+
+    flag_bras = 0;  // bras occupe
+
     if (debug) {
       Serial.print("caractere recu : couleur cube ");
       if (caractere == 'R') Serial.print("red : ");
@@ -155,8 +168,6 @@ void loop() {
     // Position of the Servo Motors to download the objet
     position(100, 340, 150, 420, 400);
 
-    Serial.println(caractere);
-
     if (caractere == 'R') {
       // Position of the Servo Motors deplacement
       position(540, 340, 150, 450, 400);
@@ -167,13 +178,10 @@ void loop() {
       position(540, 340, 150, 500, 400);
       position(540, 340, 150, 400, 400);
       velocidad = 350;
-      velocidad = 350;// Position of the Servo Motors to exit the objet
+      velocidad = 350;  // Position of the Servo Motors to exit the objet
       position(540, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(540, 340, 150, 420, 300);
-
-      caractere = '0';  // effacement du caratere apres lecture
-      id = 0x0;         // effacement de la variable id apres lecture
 
     } else if (caractere == 'G') {
       // Position of the Servo Motors deplacement
@@ -190,9 +198,6 @@ void loop() {
       // Position of the Servo Motors to prepare
       position(480, 340, 150, 420, 300);
 
-      caractere = '0';  // effacement du caratere apres lecture
-      id = 0x0;         // effacement de la variable id apres lecture
-
     } else if (caractere == 'B') {
       // Position of the Servo Motors deplacement
       position(450, 340, 150, 400, 400);
@@ -208,9 +213,6 @@ void loop() {
       // Position of the Servo Motors to prepare
       position(420, 340, 150, 420, 300);
 
-      caractere = '0';  // effacement du caratere apres lecture
-      id = 0x0;         // effacement de la variable id apres lecture
-
     } else if (caractere == 'Y') {
       // Position of the Servo Motors deplacement
       position(360, 340, 150, 400, 400);
@@ -225,14 +227,14 @@ void loop() {
       position(360, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(360, 340, 150, 420, 300);
-
-      caractere = '0';  // effacement du caratere apres lecture
-      id = 0x0;         // effacement de la variable id apres lecture
-
     }
+
+    caractere = '0';  // effacement du caratere apres lecture
+    id = 0x0;         // effacement de la variable id apres lecture
 
     // Position of the Servo Motors for the first movement of the Robot Arm
     position(320, 340, 300, 420, 420);
 
+    flag_bras = 1;  // bras disponible
   }
 }

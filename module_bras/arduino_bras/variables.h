@@ -9,7 +9,6 @@
 //========================================================
 #define TEST 0   // if 1 true,  0 false
 #define debug 1  // for use Display log message if True
-bool bras = 1;  // 1 libre, 0 occupe
 
 //==========================================
 // Affectation des broches de l'arduino uno
@@ -30,9 +29,9 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 //==========
 // Variables
 //==========
-char caract = '0';  // lecture can
-char caractere = '0';  // caractere
-int id = 0x0;          // valeur hexa de l'identification id sur le can bus
+char caractere = '0';    // caractere
+int id = 0x0;            // valeur hexa de l'identification id sur le can bus
+bool flag_bras = 1;      // flag bras  1 disponible, 0 occupe
 
 //=======
 // Servos

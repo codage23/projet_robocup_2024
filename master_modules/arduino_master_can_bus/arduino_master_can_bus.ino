@@ -58,10 +58,6 @@ void onReceive(int packetSize) {
     caractere = (char)CAN.read();  // lecture du bus can dans la variable caractere
     id = CAN.packetId();           // id du message can  dans la variable id
   }
-  // si reponse Oui du bras, alors mise a jour du flag
-  if (id == 0x18 and caractere == 'O') {
-    flag_bras = 1;  // flag mis à 1 suite à la dispo du bras
-  }
 }
 
 //========================
@@ -103,7 +99,16 @@ void loop() {
   // id 18 : bras articule  (Red Green Blue Yellow)
   // id 19 : detection de la couleur du cube avec le portique n°2  (Red Green Blue Yellow Non_reconnu)
 
-  flag_bras = 1;  // pour les tests
+  // si reponse Oui du bras, alors mise a jour du flag
+  if (id == 0x18 and caractere == 'O') {
+    flag_bras = 1;  // flag mis à 1 suite à la dispo du bras
+    if (debug) {
+      Serial.print("reponse Disponible du bras : ");
+      Serial.print(caractere);
+      Serial.print("   id : ");
+      Serial.println(id, HEX);
+    }
+  }
 
   if (flag_bras == 0) {  // attente de la disponibilite du bras
     // effacement des lignes de l'ecran du master
@@ -116,12 +121,23 @@ void loop() {
     CAN.write(caractere);
     CAN.endPacket();                       // envoi sur le bus can de la demande de disponibilte du bras (reponse dans la routine onReceive)
     affichage_ecran(0, caractere, id, 2);  // affichage du code transmis (0) sur la ligne n
+    if (debug) {
+      Serial.print("demande de disponibilite du bras : ");
+      Serial.print(caractere);
+      Serial.print("   id : ");
+      Serial.println(id, HEX);
+    }
+    delay(500);
 
   } else if (flag_bras == 1) {  // bras dispo
     // effacement des lignes de l'ecran du master
     clearLigne(2);
     clearLigne(4);
     clearLigne(6);
+    if (debug) {
+      Serial.print("flag_bras : ");
+      Serial.println(flag_bras);
+    }
 
     if (flag_extinction != 1) {
       id = 0x17;
@@ -174,7 +190,8 @@ void loop() {
 
     // reception du portique id 0x16 - couleur du cube
     if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x16)) {  // le portique a deux detecteurs id 16 et id 19
-      couleur = caractere;                                                                                  //sauvegarde du caractere couleur dans la variable couleur
+      couleur = caractere; //sauvegarde du caractere couleur dans la variable couleur
+      flag_couleur = 1;  
       if (debug) {
         Serial.print("caractere recu : couleur cube ");
         if (caractere == 'R') Serial.print("red : ");
@@ -204,6 +221,7 @@ void loop() {
 
     // reception du convoyeur id 0x12 - objet present P
     if (caractere == 'P' and id == 0x12) {
+      flag_objet_present = 1;
       if (debug) {
         Serial.print("caractere recu : objet present : ");
         Serial.print(caractere);
@@ -228,7 +246,7 @@ void loop() {
       id = 0x18;
       CAN.beginPacket(id);
       CAN.write(couleur);
-      CAN.endPacket();                       // envoi au bras, la couleur sur le bus can
+      CAN.endPacket();                     // envoi au bras, la couleur sur le bus can
       affichage_ecran(0, couleur, id, 4);  // affichage du code transmis (0) sur la ligne n
       clearLigne(6);
       if (debug) {
@@ -245,7 +263,8 @@ void loop() {
 
     // reception du convoyeur id 0x12 - objet absent A
 
-    if (caractere == 'A' and id == 0x12) {  // caractere recu  absent sur le convoyeur
+    if (caractere == 'A' and id == 0x12 and flag_couleur == 1 and flag_objet_present == 1 and flag_objet_absent != 1) {  // caractere recu  absent sur le convoyeur
+      flag_objet_absent = 1;
       if (debug) {
         Serial.print("caractere recu : objet absent  : ");
         Serial.print(caractere);
@@ -262,6 +281,9 @@ void loop() {
       flag_extinction = 0;
       flag_demarrage = 0;
       flag_lache = 0;
+      flag_couleur = 0;        // flag couleur du cube
+      flag_objet_present = 0;  // sur le convoyeur
+      flag_objet_absent = 0;   // sur le convoyeur
     }
   }
 }
