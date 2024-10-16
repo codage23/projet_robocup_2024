@@ -32,6 +32,7 @@ const int SPI_CS_PIN = 10;  // CS du shield mcp2515
 char caractere = '0';    // caractere
 int id = 0x0;            // valeur hexa de l'identification id sur le can bus
 bool flag_bras = 1;      // flag bras  1 disponible, 0 occupe
+char couleur = '0';      // sauvegarde de la couleur
 
 //=======
 // Servos

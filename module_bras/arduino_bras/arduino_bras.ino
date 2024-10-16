@@ -119,15 +119,10 @@ void onReceive(int packetSize) {
   }
 }
 
-
 //======
 // loop
 //======
 void loop() {
-  // pour tester la sequence
-  //delay(2000);
-  //caract = 'R';
-  //id = 0x18;
 
   if (caractere == 'D' and id == 0x18) {  // demande si le bras est disponible
     id = 0x18;
@@ -139,12 +134,17 @@ void loop() {
     CAN.beginPacket(id);
     CAN.write(caractere);
     CAN.endPacket();  // envoi sur le bus can
+    Serial.print("reponse du bras : ");
+    Serial.print(caractere);
+    Serial.print("   id : ");
+    Serial.println(id, HEX);
   }
 
   // reception de la couleur du master id 0x18 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x18) and (flag_bras == 1)) {
 
-    flag_bras = 0;  // bras occupe
+    couleur = caractere;  // sauvegarde de la couleur recue
+    flag_bras = 0;        // bras occupe
 
     if (debug) {
       Serial.print("caractere recu : couleur cube ");
@@ -168,7 +168,7 @@ void loop() {
     // Position of the Servo Motors to download the objet
     position(100, 340, 150, 420, 400);
 
-    if (caractere == 'R') {
+    if (couleur == 'R') {
       // Position of the Servo Motors deplacement
       position(540, 340, 150, 450, 400);
       // rotation de la main
@@ -177,13 +177,13 @@ void loop() {
       position(540, 340, 150, 300, 400);
       position(540, 340, 150, 500, 400);
       position(540, 340, 150, 400, 400);
-      velocidad = 350;
       velocidad = 350;  // Position of the Servo Motors to exit the objet
       position(540, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(540, 340, 150, 420, 300);
+      couleur = '0';
 
-    } else if (caractere == 'G') {
+    } else if (couleur == 'G') {
       // Position of the Servo Motors deplacement
       position(480, 340, 150, 450, 400);
       // rotation de la main
@@ -197,8 +197,9 @@ void loop() {
       position(480, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(480, 340, 150, 420, 300);
+      couleur = '0';
 
-    } else if (caractere == 'B') {
+    } else if (couleur == 'B') {
       // Position of the Servo Motors deplacement
       position(450, 340, 150, 400, 400);
       // rotation de la main
@@ -212,8 +213,9 @@ void loop() {
       position(420, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(420, 340, 150, 420, 300);
+      couleur = '0';
 
-    } else if (caractere == 'Y') {
+    } else if (couleur == 'Y') {
       // Position of the Servo Motors deplacement
       position(360, 340, 150, 400, 400);
       // rotation de la main
@@ -227,6 +229,7 @@ void loop() {
       position(360, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
       position(360, 340, 150, 420, 300);
+      couleur = '0';
     }
 
     caractere = '0';  // effacement du caratere apres lecture

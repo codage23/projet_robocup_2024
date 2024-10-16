@@ -127,7 +127,6 @@ void loop() {
       Serial.print("   id : ");
       Serial.println(id, HEX);
     }
-    delay(500);
 
   } else if (flag_bras == 1) {  // bras dispo
     // effacement des lignes de l'ecran du master
@@ -135,8 +134,8 @@ void loop() {
     clearLigne(4);
     clearLigne(6);
     if (debug) {
-      Serial.print("flag_bras : ");
-      Serial.println(flag_bras);
+      //Serial.print("flag_bras : ");
+      //Serial.println(flag_bras);
     }
 
     if (flag_extinction != 1) {
@@ -171,7 +170,6 @@ void loop() {
       }
     }
 
-    delay(1000);
     if (flag_lache != 1) {
       id = 0x14;
       caractere = 'L';
@@ -191,6 +189,8 @@ void loop() {
     // reception du portique id 0x16 - couleur du cube
     if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x16)) {  // le portique a deux detecteurs id 16 et id 19
       couleur = caractere; //sauvegarde du caractere couleur dans la variable couleur
+      Serial.print("couleur : ");
+        Serial.println(couleur);
       flag_couleur = 1;  
       if (debug) {
         Serial.print("caractere recu : couleur cube ");
@@ -262,7 +262,6 @@ void loop() {
     }
 
     // reception du convoyeur id 0x12 - objet absent A
-
     if (caractere == 'A' and id == 0x12 and flag_couleur == 1 and flag_objet_present == 1 and flag_objet_absent != 1) {  // caractere recu  absent sur le convoyeur
       flag_objet_absent = 1;
       if (debug) {

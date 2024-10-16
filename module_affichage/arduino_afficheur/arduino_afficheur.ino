@@ -34,6 +34,31 @@ void onReceive(int packetSize) {
   }
 }
 
+//====================
+// allumage d'une led
+//====================
+void allumageLedBlue(int num) {
+  leds[num] = CRGB::Blue;
+  delay(1);
+  FastLED.show();
+}
+void allumageLedRed(int num) {
+  leds[num] = CRGB::Red;
+  delay(1);
+  FastLED.show();
+}
+void allumageLedYellow(int num) {
+  leds[num] = CRGB::Yellow;
+  delay(1);
+  FastLED.show();
+}
+void allumageLedGreen(int num) {
+  leds[num] = CRGB::Green;
+  delay(1);
+  FastLED.show();
+}
+
+
 //======
 // setup
 //======
@@ -43,9 +68,6 @@ void setup() {
     Serial.begin(9600);
     while (!Serial)
       ;
-  }
-
-  if (debug) {
     Serial.println("Demarrage de l'afficheur");
   }
 
@@ -53,13 +75,13 @@ void setup() {
   FastLED.setBrightness(10);                                                 // Number 0-255
   FastLED.clear(true);
 
-  // effacement du tableau de leds 256
+  // effacement du tableau de leds
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Black;
     delay(1);
     FastLED.show();
   }
- /*
+  /*
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
     if (debug) {
@@ -78,8 +100,19 @@ void setup() {
 // loop
 //======
 void loop() {
-caractere = 'Y';
-id = 0x17;
+
+  allumageLedBlue(120);
+  allumageLedBlue(90);
+  allumageLedRed(136);
+  allumageLedYellow(200);
+  allumageLedGreen(100);
+  allumageLedGreen(91);
+  allumageLedGreen(68);
+
+  // pour test de bon fonctionnement
+  //caractere = 'Y';
+  //id = 0x17;
+
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
     if (caractere == 'R') {
@@ -126,11 +159,13 @@ id = 0x17;
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
   }
-caractere = 'E';
-id = 0x17;
-  delay (2000);
- 
-  if ((caractere == 'E') and id == 0x17) {  // effacement afficheur id 0x17
+
+  // pour test de bon fonctionnement
+  //caractere = 'E';
+  //id = 0x17;
+
+  // effacement afficheur id 0x17
+  if ((caractere == 'E') and id == 0x17) {
     // effacement du tableau de leds 256
     for (int i = 0; i < NUM_LEDS; i++) {
       leds[i] = CRGB::Black;
@@ -139,78 +174,3 @@ id = 0x17;
     FastLED.show();
   }
 }
-
-/*
-// ----- Allumer une LED en particulier ------------------------------
-
-  leds.DrawPixel(3, 3, (CRGB::Green));
-  FastLED.show();
-  delay(pause);
-  leds.DrawPixel(3, 4, (CRGB::Blue));
-  FastLED.show();
-  delay(pause);
-  leds.DrawPixel(4, 3, (CRGB::Red));
-  FastLED.show();
-  delay(pause);
-  leds.DrawPixel(4, 4, (CRGB::Yellow));
-  FastLED.show();
-  delay(pause);
-
-  // effet miroir: on reproduit le même motif dans les 3 autres quadrants
-
-  leds.QuadrantMirror();
-  FastLED.show();
-  delay(2 * pause);
-
-  // ----- Déplacer le motif vers la droite --------------------------
-
-  for (int i = 0; i <= 12; i++) {
-    leds.ShiftRight();
-    FastLED.show();
-    delay(pause / 2);
-  }
-
-  // ------ dessiner une ligne droite -------------------------------
-
-  leds.DrawLine(4, 0, 4, 255, (CRGB::Green));
-  FastLED.show();
-  delay(pause);
-  leds.DrawLine(11, 0, 11, 255, (CRGB::Blue));
-  FastLED.show();
-  delay(pause);
-  leds.DrawLine(0, 4, 255, 4, (CRGB::Red));
-  FastLED.show();
-  delay(pause);
-  leds.DrawLine(0, 11, 255, 11, (CRGB::Pink));
-  FastLED.show();
-  delay(pause);
-
-
-  // effet miroir ------------------------------------
-
-  leds.QuadrantTopTriangleMirror();
-  FastLED.show();
-  delay(2 * pause);
-
-  FastLED.clear(true);  // on éteint toutes les LEDs
-
-
-
-  // -- dessiner un cercle plein ------------------------
-
-  leds.DrawFilledCircle(4, 4, 2, (CRGB::Blue));
-  FastLED.show();
-  delay(pause);
-
-  // -- miroir horizontal -------------------------
-  leds.HorizontalMirror();
-  FastLED.show();
-  delay(pause);
-
-  // -- miroir vertical --------------------------
-  leds.VerticalMirror();
-  FastLED.show();
-  delay(pause);
-
-  FastLED.clear(true);  // on éteint toutes les LEDs
-*/
