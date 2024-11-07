@@ -185,50 +185,50 @@ void loop() {
 
     } else if (couleur == 'G') {
       // Position of the Servo Motors deplacement
-      position(480, 340, 150, 450, 400);
+      position(470, 340, 150, 450, 400);
       // rotation de la main
       velocidad = 80;
-      position(480, 340, 150, 500, 400);
-      position(480, 340, 150, 400, 400);
-      position(480, 340, 150, 300, 400);
-      position(480, 340, 150, 400, 400);
+      position(470, 340, 150, 500, 400);
+      position(470, 340, 150, 400, 400);
+      position(470, 340, 150, 300, 400);
+      position(470, 340, 150, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(480, 230, 150, 400, 300);
+      position(470, 230, 150, 400, 300);
       // Position of the Servo Motors to prepare
-      position(480, 340, 150, 420, 300);
-      couleur = '0';
-
-    } else if (couleur == 'B') {
-      // Position of the Servo Motors deplacement
-      position(450, 340, 150, 400, 400);
-      // rotation de la main
-      velocidad = 80;
-      position(420, 340, 150, 500, 400);
-      position(420, 340, 150, 400, 400);
-      position(420, 340, 150, 300, 400);
-      position(420, 340, 150, 400, 400);
-      velocidad = 350;
-      // Position of the Servo Motors to exit the objet
-      position(420, 230, 150, 400, 300);
-      // Position of the Servo Motors to prepare
-      position(420, 340, 150, 420, 300);
+      position(470, 340, 150, 420, 300);
       couleur = '0';
 
     } else if (couleur == 'Y') {
       // Position of the Servo Motors deplacement
-      position(360, 340, 150, 400, 400);
+      position(425, 340, 150, 400, 400);
       // rotation de la main
       velocidad = 80;
-      position(360, 340, 150, 500, 400);
-      position(360, 340, 150, 400, 400);
-      position(360, 340, 150, 300, 400);
-      position(360, 340, 150, 400, 400);
+      position(420, 300, 230, 500, 400);
+      position(420, 300, 230, 400, 400);
+      position(420, 300, 230, 300, 400);
+      position(420, 300, 230, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(360, 230, 150, 400, 300);
+      position(420, 230, 230, 400, 300);
       // Position of the Servo Motors to prepare
-      position(360, 340, 150, 420, 300);
+      position(420, 340, 230, 420, 300);
+      couleur = '0';
+
+    } else if (couleur == 'B') {
+      // Position of the Servo Motors deplacement
+      position(365, 340, 150, 400, 400);
+      // rotation de la main
+      velocidad = 80;
+      position(365, 340, 150, 500, 400);
+      position(365, 340, 150, 400, 400);
+      position(365, 340, 150, 300, 400);
+      position(365, 340, 150, 400, 400);
+      velocidad = 350;
+      // Position of the Servo Motors to exit the objet
+      position(365, 230, 150, 400, 300);
+      // Position of the Servo Motors to prepare
+      position(365, 340, 150, 420, 300);
       couleur = '0';
     }
 

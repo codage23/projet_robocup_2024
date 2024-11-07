@@ -190,8 +190,8 @@ void loop() {
     if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x16)) {  // le portique a deux detecteurs id 16 et id 19
       couleur = caractere; //sauvegarde du caractere couleur dans la variable couleur
       Serial.print("couleur : ");
-        Serial.println(couleur);
-      flag_couleur = 1;  
+      Serial.println(couleur);
+      flag_couleur = 1;
       if (debug) {
         Serial.print("caractere recu : couleur cube ");
         if (caractere == 'R') Serial.print("red : ");
@@ -229,36 +229,37 @@ void loop() {
         Serial.println(id, HEX);
       }
       affichage_ecran(1, caractere, id, 2);  // affichage du code recu (1) sur la ligne n
+      if (couleur == 'R' or couleur == 'G' or couleur == 'B' or couleur == 'Y') {
+        id = 0x11;
+        caractere = 'S';
+        CAN.beginPacket(id);
+        CAN.write(caractere);
+        CAN.endPacket();                       // envoi sur le bus can  objet present sur le convoyeur commande stop S
+        affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
+        if (debug) {
+          Serial.print("objet present sur le convoyeur envoi commande stop S : ");
+          Serial.print(caractere);
+          Serial.print("   id : ");
+          Serial.println(id, HEX);
+        }
 
-      id = 0x11;
-      caractere = 'S';
-      CAN.beginPacket(id);
-      CAN.write(caractere);
-      CAN.endPacket();                       // envoi sur le bus can  objet present sur le convoyeur commande stop S
-      affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
-      if (debug) {
-        Serial.print("objet present sur le convoyeur envoi commande stop S : ");
-        Serial.print(caractere);
-        Serial.print("   id : ");
-        Serial.println(id, HEX);
+        id = 0x18;
+        CAN.beginPacket(id);
+        CAN.write(couleur);
+        CAN.endPacket();                     // envoi au bras, la couleur sur le bus can
+        affichage_ecran(0, couleur, id, 4);  // affichage du code transmis (0) sur la ligne n
+        clearLigne(6);
+        if (debug) {
+          Serial.print("envoi de la couleur au bras : ");
+          Serial.print(couleur);
+          Serial.print("   id : ");
+          Serial.println(id, HEX);
+        }
+
+        caractere = '0';  // effacement du caratere apres lecture
+        id = 0x0;         // effacement de la variable id apres lecture
+        couleur = '0';    // effacement de la sauvegarde de la couleur
       }
-
-      id = 0x18;
-      CAN.beginPacket(id);
-      CAN.write(couleur);
-      CAN.endPacket();                     // envoi au bras, la couleur sur le bus can
-      affichage_ecran(0, couleur, id, 4);  // affichage du code transmis (0) sur la ligne n
-      clearLigne(6);
-      if (debug) {
-        Serial.print("envoi de la couleur au bras : ");
-        Serial.print(couleur);
-        Serial.print("   id : ");
-        Serial.println(id, HEX);
-      }
-
-      caractere = '0';  // effacement du caratere apres lecture
-      id = 0x0;         // effacement de la variable id apres lecture
-      couleur = '0';    // effacement de la sauvegarde de la couleur
     }
 
     // reception du convoyeur id 0x12 - objet absent A

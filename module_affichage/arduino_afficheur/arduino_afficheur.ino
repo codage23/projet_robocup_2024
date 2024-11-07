@@ -43,7 +43,7 @@ void allumageLedBlue(int num) {
   FastLED.show();
 }
 void allumageLedRed(int num) {
-  leds[num] = CRGB::Red;
+  leds[num] = CRGB::Green;
   delay(1);
   FastLED.show();
 }
@@ -100,18 +100,56 @@ void setup() {
 // loop
 //======
 void loop() {
-
-  allumageLedBlue(120);
-  allumageLedBlue(90);
+  allumageLedRed(124);
+  allumageLedRed(3);
+  allumageLedRed(28);
+  allumageLedRed(35);
+  allumageLedRed(60);
+  allumageLedRed(67);
+  allumageLedRed(92);
+  allumageLedRed(99);
+  allumageLedRed(131);
+  allumageLedRed(156);
+  allumageLedRed(163);
+  allumageLedRed(188);
+  allumageLedRed(195);
+  allumageLedRed(220);
+  allumageLedRed(219);
+  allumageLedRed(218);
+  allumageLedRed(217);
+  allumageLedRed(216);
+  allumageLedRed(215);
+  allumageLedRed(214);
+  allumageLedRed(213);
+  allumageLedRed(212);
+  allumageLedRed(203);
+  allumageLedRed(180);
+  allumageLedRed(171);
+  allumageLedRed(148);
+  allumageLedRed(139);
+  allumageLedRed(138);
+  allumageLedRed(137);
   allumageLedRed(136);
-  allumageLedYellow(200);
-  allumageLedGreen(100);
-  allumageLedGreen(91);
-  allumageLedGreen(68);
-
+  allumageLedRed(135);
+  allumageLedRed(134);
+  allumageLedRed(133);
+  allumageLedRed(132);
+  allumageLedRed(11);
+  allumageLedRed(21);
+  allumageLedRed(41);
+  allumageLedRed(55);
+  allumageLedRed(71);
+  allumageLedRed(89);
+  allumageLedRed(101);
+  allumageLedRed(123);
+  
+  
+  
+/*
   // pour test de bon fonctionnement
-  //caractere = 'Y';
-  //id = 0x17;
+  caractere = 'Y';
+  id = 0x17;
+*/  
 
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
@@ -119,7 +157,7 @@ void loop() {
       // affichage de la couleur rouge
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Red;
-        delay(10);
+        delay(1);
         FastLED.show();
       }
     } else if (caractere == 'G') {
