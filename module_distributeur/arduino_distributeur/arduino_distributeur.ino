@@ -38,6 +38,10 @@ void setup() {
     Serial.println("Starting CAN failed!");
     while (1)
       ;
+  } else {
+    if (debug) {
+      Serial.println("Starting CAN");
+    }
   }
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
@@ -59,12 +63,13 @@ void libererCube() {
 
   for (int position = 0; position <= 180; position++) {  // on crée une variable position qui prend des valeurs entre 0 à 180 degrés
     monServo.write(position);                            // le bras du servomoteur prend la position de la variable position
-    delay(5);                                            // on attend 15 millisecondes
+    delay(8);                                           // on attend 15 millisecondes
   }
+  delay(1200);
 
   for (int position = 180; position >= 0; position--) {  // cette fois la variable position passe de 180 à 0°
     monServo.write(position);                            // le bras du servomoteur prend la position de la variable position
-    delay(5);                                            // le bras du servomoteur prend la position de la variable position
+    delay(8);                                           // le bras du servomoteur prend la position de la variable position
   }
 }
 
@@ -73,7 +78,12 @@ void libererCube() {
 //======
 void loop() {
 
-  libererCube();  // pour tester la fonction
+  caractere = 'L';
+  id = 0x14;
+  delay(3000);
+
+
+  //libererCube();  // pour tester la fonction
 
   // reception commande L du master id 0x14 - liberer un cube
   if (caractere == 'L' and id == 0x14) {

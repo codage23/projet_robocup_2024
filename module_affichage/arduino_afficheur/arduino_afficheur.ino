@@ -7,22 +7,47 @@
     https://github.com/Jorgen-VikingGod/LEDMatrix
     https://electroniqueamateur.blogspot.com/2021/03/ecrire-des-nombres-sur-une-matrice-de.html
     https://electroniqueamateur.blogspot.com/2020/05/matrice-de-leds-rgb-16-x-16-ws2812b-et.html
+    https://electroniqueamateur.blogspot.com/2021/02/esp8266-et-esp32-controle-dune-matrice.html
     https://www.instructables.com/16x16-RGB-LED-Panel-Arduino-Projects/
+
 *************************************************************************************************/
 
 //=============================
 // inclusion des bibliothèques
 //=============================
-#include <CAN.h>        // pour la bibliothèque CAN
-#include <SPI.h>        // bus spi
-#include "variables.h"  // fichier variables
-#include <FastLED.h>    // https://github.com/FastLED/FastLED
-#include <LEDMatrix.h>  // https://github.com/Jorgen-VikingGod/LEDMatrix
+#include <CAN.h>           // pour la bibliothèque CAN
+#include <SPI.h>           // bus spi
+#include "variables.h"     // fichier variables
+#include <avr/pgmspace.h>  // pour utiliser la memoire flash et augmenter la memoire de travail
+#include <FastLED.h>       // https://github.com/FastLED/FastLED
+//#include <LEDMatrix.h>  // https://github.com/Jorgen-VikingGod/LEDMatrix
 
 
 CRGB leds[NUM_LEDS];  // creation d'un objet leds avec la bibliotheque fastled
 
+CRGB laCouleur = CRGB::Black;
 //cLEDMatrix<MATRIX_WIDTH, MATRIX_HEIGHT, MATRIX_TYPE> leds;
+
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuchsia
+const char tableau[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
+  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 0
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 8
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 9
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 10
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 15
+};
 
 //==================================
 //  CAN reception suite interruption
@@ -37,27 +62,17 @@ void onReceive(int packetSize) {
 //====================
 // allumage d'une led
 //====================
-void allumageLedBlue(int num) {
-  leds[num] = CRGB::Blue;
+void allumageLed(int i, int y, CRGB laCouleur) {
+  int num;
+  if ((i % 2) == 0) {
+    num = (i * 16) + y;  // ligne pair
+  } else {
+    num = (i * 16) + 15 - y;  // ligne impair
+  }
+  leds[num] = laCouleur;
   delay(1);
   FastLED.show();
 }
-void allumageLedRed(int num) {
-  leds[num] = CRGB::Green;
-  delay(1);
-  FastLED.show();
-}
-void allumageLedYellow(int num) {
-  leds[num] = CRGB::Yellow;
-  delay(1);
-  FastLED.show();
-}
-void allumageLedGreen(int num) {
-  leds[num] = CRGB::Green;
-  delay(1);
-  FastLED.show();
-}
-
 
 //======
 // setup
@@ -81,7 +96,38 @@ void setup() {
     delay(1);
     FastLED.show();
   }
-  /*
+
+  // affichage tableau
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau[i][y]);
+      //Serial.print("valeur de la couleur = : ");
+      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+  }
+
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
     if (debug) {
@@ -89,67 +135,25 @@ void setup() {
     }
     while (1)
       ;
+  } else {
+    if (debug) {
+      Serial.println("Starting CAN");
+    }
   }
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
-  */
 }
 
 //======
 // loop
 //======
 void loop() {
-  allumageLedRed(124);
-  allumageLedRed(3);
-  allumageLedRed(28);
-  allumageLedRed(35);
-  allumageLedRed(60);
-  allumageLedRed(67);
-  allumageLedRed(92);
-  allumageLedRed(99);
-  allumageLedRed(131);
-  allumageLedRed(156);
-  allumageLedRed(163);
-  allumageLedRed(188);
-  allumageLedRed(195);
-  allumageLedRed(220);
-  allumageLedRed(219);
-  allumageLedRed(218);
-  allumageLedRed(217);
-  allumageLedRed(216);
-  allumageLedRed(215);
-  allumageLedRed(214);
-  allumageLedRed(213);
-  allumageLedRed(212);
-  allumageLedRed(203);
-  allumageLedRed(180);
-  allumageLedRed(171);
-  allumageLedRed(148);
-  allumageLedRed(139);
-  allumageLedRed(138);
-  allumageLedRed(137);
-  allumageLedRed(136);
-  allumageLedRed(135);
-  allumageLedRed(134);
-  allumageLedRed(133);
-  allumageLedRed(132);
-  allumageLedRed(11);
-  allumageLedRed(21);
-  allumageLedRed(41);
-  allumageLedRed(55);
-  allumageLedRed(71);
-  allumageLedRed(89);
-  allumageLedRed(101);
-  allumageLedRed(123);
-  
-  
-  
-/*
-  // pour test de bon fonctionnement
-  caractere = 'Y';
-  id = 0x17;
-*/  
+  /*
+    // pour test de bon fonctionnement
+    caractere = 'G';
+    id = 0x17;
+  */
 
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
