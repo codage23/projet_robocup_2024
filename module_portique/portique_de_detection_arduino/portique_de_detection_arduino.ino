@@ -26,7 +26,7 @@ char colorLetter[num_of_colors] = { 'W', 'N', 'R', 'Y', 'G', 'T', 'B' };
 int distinctRGB_1[num_of_colors][3] = { { 200, 200, 200 }, { 7, 6, 8 }, { 76, 47, 47 }, { 90, 76, 100 }, { 55, 66, 71 }, { 250, 250, 250 }, { 41, 47, 47 } };
 int distinctRGB_2[num_of_colors][3] = { { 200, 200, 200 }, { 7, 6, 8 }, { 55, 21, 27 }, { 71, 58, 40 }, { 27, 40,34 }, { 250, 250, 250 }, { 23, 31, 50 } };
 
-tcs3200 tcs_1(S0_1, S1_1, S2_1, S3_1, sensorOut_1);  // (S0, S1, S2, S3, output pin) //  https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
+tcs3200 tcs_1(S0_1, S1_1, S2_1, S3_1, sensorOut_1);  // (S0, S1, S2, S3, output pin)   https://www.mouser.com/catalog/specsheets/TCS3200-E11.pdf
 tcs3200 tcs_2(S0_2, S1_2, S2_2, S3_2, sensorOut_2);
 
 //======================

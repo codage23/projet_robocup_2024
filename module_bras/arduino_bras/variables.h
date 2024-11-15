@@ -39,7 +39,7 @@ char couleur = '0';      // sauvegarde de la couleur
 //=======
 #define SERVOMIN 100  // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX 500  // This is the 'maximum' pulse length count (out of 4096)
-int velocidad = 350;  // Velocidad du mouvement
+int velocidad = 300;  // Velocidad du mouvement 350
 
 // mini, neutre et maxi de tous les servos
 #define MINIWAIST0 100    // position minimum du servo 0  waist - taille

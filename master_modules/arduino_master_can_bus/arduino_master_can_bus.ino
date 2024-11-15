@@ -112,9 +112,9 @@ void loop() {
 
   if (flag_bras == 0) {  // attente de la disponibilite du bras
     // effacement des lignes de l'ecran du master
-    clearLigne(2);
-    clearLigne(4);
-    clearLigne(6);
+    //clearLigne(2);
+    //clearLigne(4);
+    //clearLigne(6);
     id = 0x18;
     caractere = 'D';
     CAN.beginPacket(id);
@@ -130,9 +130,9 @@ void loop() {
 
   } else if (flag_bras == 1) {  // bras dispo
     // effacement des lignes de l'ecran du master
-    clearLigne(2);
-    clearLigne(4);
-    clearLigne(6);
+    //clearLigne(2);
+    //clearLigne(4);
+    //clearLigne(6);
     if (debug) {
       //Serial.print("flag_bras : ");
       //Serial.println(flag_bras);
@@ -208,7 +208,7 @@ void loop() {
       CAN.write(caractere);
       CAN.endPacket();                       // envoi sur le bus can de la couleur a l'afficheur
       affichage_ecran(0, caractere, id, 4);  // affichage du code transmis (0) sur la ligne n
-      clearLigne(6);
+      //clearLigne(6);
       if (debug) {
         Serial.print("envoi de la couleur a l'afficheur : ");
         Serial.print(caractere);
@@ -248,7 +248,7 @@ void loop() {
         CAN.write(couleur);
         CAN.endPacket();                     // envoi au bras, la couleur sur le bus can
         affichage_ecran(0, couleur, id, 4);  // affichage du code transmis (0) sur la ligne n
-        clearLigne(6);
+        //clearLigne(6);
         if (debug) {
           Serial.print("envoi de la couleur au bras : ");
           Serial.print(couleur);
@@ -272,8 +272,8 @@ void loop() {
         Serial.println(id, HEX);
       }
       affichage_ecran(1, caractere, id, 2);  // affichage du code recu (1) sur la ligne n
-      clearLigne(4);
-      clearLigne(6);
+      //clearLigne(4);
+      //clearLigne(6);
 
       caractere = '0';  // effacement du caratere apres lecture
       id = 0x0;         // effacement de la variable id apres lecture

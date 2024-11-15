@@ -90,6 +90,10 @@ void onReceive(int packetSize) {
 // loop
 //======
 void loop() {
+//====================================
+// convoyeur avec CAN bus et le master
+//====================================
+#if CANBUS
   // demarrage progessif - une seule fois
   if (marche) {
     configurerSensDeRotationPontB(MARCHE_AVANT);  //sens de rotation du moteur en "marche avant"
@@ -130,10 +134,11 @@ void loop() {
     id = 0x0;                                    // effacement de la variable id apres lecture
   }
   if (caractere == 'D' and id == 0x11) {         // reception commande D du master  id 0x11
-    marche = 1;                                  //  pour valider un nouveau demarrage car l'objet n'est plus present
+    marche = 1;                                  // pour valider un nouveau demarrage car l'objet n'est plus present
     caractere = '0';                             // effacement du caratere apres lecture
     id = 0x0;                                    // effacement de la variable id apres lecture
   }
+#endif
 
 //====================================
 // convoyeur autonome - sans le master

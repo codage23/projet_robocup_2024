@@ -7,8 +7,9 @@
 //========================================================
 // Differentes fonctions du programme
 //========================================================
-#define TEST 0       // if 1 true,  0 false
-#define AUTONOME 0   // if 1 convoyeur autonome, 0 commandes CAN bus
+#define TEST 0       // if 1 true
+#define AUTONOME 0   // if 1 convoyeur autonome
+#define CANBUS 1     // if 1 CAN bus
 #define debug 1      // for use Display log message if True
 
 //==========================================
