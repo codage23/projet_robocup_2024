@@ -31,22 +31,22 @@ CRGB laCouleur = CRGB::Black;
 // tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuchsia
 const char tableau[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
   //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 0
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 8
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 9
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 10
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
-  { 'R', 'N', 'G', 'N', 'B', 'N', 'Y', 'N', 'F', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 15
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'B', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
+  { 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'R', 'B', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 10
+  { 'N', 'N', 'N', 'N', 'N', 'G', 'R', 'R', 'R', 'B', 'N', 'N', 'N', 'N', 'N', 'N' },  // 9
+  { 'N', 'N', 'N', 'W', 'N', 'R', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N' },  // 8
+  { 'N', 'N', 'W', 'W', 'N', 'N', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'W', 'W', 'W', 'N', 'N', 'N', 'R', 'N', 'W', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'W', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
+  { 'W', 'W', 'N', 'W', 'N', 'N', 'N', 'N', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
+  { 'W', 'W', 'N', 'W', 'W', 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
+  { 'W', 'W', 'W', 'N', 'N', 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
+  { 'W', 'W', 'W', 'W', 'W', 'N', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
+  { 'W', 'W', 'W', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
 };
 
 //==================================
@@ -63,12 +63,22 @@ void onReceive(int packetSize) {
 // allumage d'une led
 //====================
 void allumageLed(int i, int y, CRGB laCouleur) {
+  /*
   int num;
   if ((i % 2) == 0) {
     num = (i * 16) + y;  // ligne pair
   } else {
     num = (i * 16) + 15 - y;  // ligne impair
   }
+  */
+
+   int num;
+  if ((i % 2) == 0) {
+    num = 255 - (i * 16) - 15 + y;  // ligne pair
+  } else {
+    num = 255 - (i * 16) + y;  // ligne impair
+  }
+
   leds[num] = laCouleur;
   delay(1);
   FastLED.show();
@@ -121,6 +131,10 @@ void setup() {
       } else if (valCouleur == 'F') {
         laCouleur = CRGB::Fuchsia;
         allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+        
       } else {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
