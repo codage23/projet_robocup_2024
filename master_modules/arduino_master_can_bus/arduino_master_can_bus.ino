@@ -37,6 +37,7 @@ void setup() {
   oled.update();  // affichage
   delay(500);
 
+  Serial.println("");
   Serial.println("Demarrage du master");
 
   // start the CAN bus at 125 kbps
@@ -103,7 +104,7 @@ void loop() {
   if (id == 0x18 and caractere == 'O') {
     flag_bras = 1;  // flag mis à 1 suite à la dispo du bras
     if (debug) {
-      Serial.print("reponse Disponible du bras : ");
+      Serial.print("reponse bras disponible : ");
       Serial.print(caractere);
       Serial.print("   id : ");
       Serial.println(id, HEX);
@@ -121,12 +122,14 @@ void loop() {
     CAN.write(caractere);
     CAN.endPacket();                       // envoi sur le bus can de la demande de disponibilte du bras (reponse dans la routine onReceive)
     affichage_ecran(0, caractere, id, 2);  // affichage du code transmis (0) sur la ligne n
-    if (debug) {
-      Serial.print("demande de disponibilite du bras : ");
-      Serial.print(caractere);
-      Serial.print("   id : ");
-      Serial.println(id, HEX);
-    }
+    /*
+      if (debug) {
+       Serial.print("demande de disponibilite du bras : ");
+       Serial.print(caractere);
+       Serial.print("   id : ");
+       Serial.println(id, HEX);
+      }
+    */
 
   } else if (flag_bras == 1) {  // bras dispo
     // effacement des lignes de l'ecran du master
@@ -187,7 +190,7 @@ void loop() {
     }
 
     // reception du portique id 0x16 - couleur du cube
-    if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x16)) {  // le portique a deux detecteurs id 16 et id 19
+    if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and (id == 0x19)) {  // le portique a deux detecteurs id 16 et id 19
       couleur = caractere; //sauvegarde du caractere couleur dans la variable couleur
       Serial.print("couleur : ");
       Serial.println(couleur);

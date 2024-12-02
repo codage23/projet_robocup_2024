@@ -106,14 +106,14 @@ void portiqueIR() {
       int couleur_1 = color_1();
       CAN.beginPacket(0x16);              // id 0x16 pour le detecteur de couleur_1
       CAN.write(colorLetter[couleur_1]);  // ecriture de la couleur detectee
-      //Serial.println(colorLetter[couleur_1]);
+      Serial.println(colorLetter[couleur_1]);
       CAN.endPacket();  // envoi sur le bus can
       Serial.println(colorLetter[couleur_1]);
     } else if (sensor_ir == 1) {
       int couleur_2 = color_2();
       CAN.beginPacket(0x19);              // id 0x19 pour le detecteur de couleur_2
       CAN.write(colorLetter[couleur_2]);  // ecriture de la couleur detectee
-      //Serial.println(colorLetter[couleur_2]);
+      Serial.println(colorLetter[couleur_2]);
       CAN.endPacket();  // envoi sur le bus can
       Serial.println(colorLetter[couleur_2]);
     }
