@@ -28,47 +28,88 @@ CRGB leds[NUM_LEDS];  // creation d'un objet leds avec la bibliotheque fastled
 CRGB laCouleur = CRGB::Black;
 //cLEDMatrix<MATRIX_WIDTH, MATRIX_HEIGHT, MATRIX_TYPE> leds;
 
-// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuchsia
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
 const char tableau[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
   //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
-  { 'N', 'V', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
-  { 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
-  { 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
-  { 'V', 'N', 'N', 'N', 'V', 'N', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
-  { 'V', 'N', 'N', 'N', 'V', 'N', 'V', 'N', 'V', 'V', 'V', 'N', 'N', 'N', 'N', 'N' },  // 10
-  { 'V', 'N', 'N', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'N', 'N', 'N', 'N' },  // 9
-  { 'N', 'V', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'N', 'N', 'N', 'N' },  // 7
-  { 'N', 'N', 'N', 'N', 'N', 'V', 'N', 'N', 'V', 'V', 'N', 'N', 'N', 'V', 'V', 'N' },  // 8
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'N', 'V' },  // 6
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'N', 'V', 'N', 'V', 'N', 'N', 'V' },  // 5
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'V', 'V', 'N', 'V', 'N', 'N', 'V' },  // 4
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'N', 'N', 'V' },  // 3
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'V', 'N' },  // 2
+  { 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
+  { 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
+  { 'R', 'N', 'N', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
+  { 'R', 'N', 'N', 'N', 'R', 'N', 'R', 'N', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N' },  // 10
+  { 'R', 'N', 'N', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N' },  // 9
+  { 'N', 'R', 'R', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'R', 'R', 'N' },  // 8
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'R' },  // 6
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'R', 'N', 'R', 'N', 'N', 'R' },  // 5
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'R' },  // 4
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'R' },  // 3
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'R', 'N' },  // 2
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
 };
 
-// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuchsia
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
 const char tableau1[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
   //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'V', 'V', 'N', 'N' },  // 13
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'V', 'N', 'N', 'N' },  // 12
-  { 'N', 'V', 'V', 'V', 'V', 'N', 'N', 'V', 'V', 'N', 'N', 'N', 'V', 'N', 'N', 'N' },  // 11
-  { 'N', 'V', 'N', 'N', 'V', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'N' },  // 10
-  { 'N', 'V', 'N', 'N', 'V', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'N' },  // 9
-  { 'N', 'V', 'V', 'V', 'V', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'N' },  // 8
-  { 'N', 'V', 'V', 'V', 'N', 'N', 'N', 'V', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
-  { 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
-  { 'N', 'V', 'N', 'N', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
-  { 'N', 'V', 'V', 'V', 'V', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'R', 'R', 'N', 'N' },  // 13
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'N', 'N' },  // 12
+  { 'N', 'R', 'R', 'R', 'R', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'R', 'N', 'N', 'N' },  // 11
+  { 'N', 'R', 'N', 'N', 'R', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'N' },  // 10
+  { 'N', 'R', 'N', 'N', 'R', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'N' },  // 9
+  { 'N', 'R', 'R', 'R', 'R', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'N' },  // 8
+  { 'N', 'R', 'R', 'R', 'N', 'N', 'N', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
+  { 'N', 'R', 'N', 'N', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
+  { 'N', 'R', 'R', 'R', 'R', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
 };
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
+const char tableau2[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
+  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
+  { 'N', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
+  { 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
+  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
+  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'G', 'G', 'N', 'N', 'N', 'N', 'N' },  // 10
+  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N' },  // 9
+  { 'N', 'G', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'G', 'G', 'N' },  // 8
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'G' },  // 6
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'G', 'N', 'G', 'N', 'N', 'G' },  // 5
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'G', 'N', 'G', 'N', 'N', 'G' },  // 4
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'G' },  // 3
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'N' },  // 2
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
+};
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
+const char tableau3[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
+  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'G', 'N', 'N' },  // 13
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'N' },  // 12
+  { 'N', 'G', 'G', 'G', 'G', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'G', 'N', 'N', 'N' },  // 11
+  { 'N', 'G', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 10
+  { 'N', 'G', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 9
+  { 'N', 'G', 'G', 'G', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 8
+  { 'N', 'G', 'G', 'G', 'N', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
+  { 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
+  { 'N', 'G', 'G', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
+};
+
 
 //==================================
 //  CAN reception suite interruption
@@ -122,21 +163,21 @@ void setup() {
 
 
   /*
-  // start the CAN bus at 125 kbps
-  if (!CAN.begin(125E3)) {
+    // start the CAN bus at 125 kbps
+    if (!CAN.begin(125E3)) {
     if (debug) {
       Serial.println("Starting CAN failed!");
     }
     while (1)
       ;
-  } else {
+    } else {
     if (debug) {
       Serial.println("Starting CAN");
     }
-  }
+    }
 
-  // register the receive callback - interruption des l'arrivee d'un message sur le bus can
-  CAN.onReceive(onReceive);
+    // register the receive callback - interruption des l'arrivee d'un message sur le bus can
+    CAN.onReceive(onReceive);
   */
 }
 
@@ -167,8 +208,42 @@ void loop() {
       } else if (valCouleur == 'Y') {
         laCouleur = CRGB::Yellow;
         allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'V') {
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+  }
+
+  delay(500);
+
+
+  // affichage tableau1
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau1[i][y]);
+      //Serial.print("valeur de la couleur = : ");
+      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
         laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'V') {
+        laCouleur = CRGB::Violet;
         allumageLed(i, y, laCouleur);
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
@@ -180,10 +255,41 @@ void loop() {
       }
     }
   }
+  // affichage tableau2
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau1[i][y]);
+      //Serial.print("valeur de la couleur = : ");
+      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'V') {
+        laCouleur = CRGB::Violet;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
 
-  delay(500);
-
-  // affichage tableau1
+      } else {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+  }
+  // affichage tableau3
   for (int i = 0; i < NUM_LIGNE; i++) {
     for (int y = 0; y < NUM_COLONNE; y++) {
       char valCouleur = pgm_read_byte_near(&tableau1[i][y]);

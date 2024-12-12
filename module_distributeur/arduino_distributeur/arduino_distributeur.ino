@@ -33,7 +33,7 @@ void setup() {
   monServo.write(position);  // le bras du servomoteur prend la position de la variable position
   delay(2000);
 
-  /* start the CAN bus at 125 kbps
+ //  start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
     Serial.println("Starting CAN failed!");
     while (1)
@@ -46,7 +46,7 @@ void setup() {
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
-*/
+
 }
 
 
@@ -83,8 +83,8 @@ void loop() {
   delay(3000);
 
 // pour test du dialogue
-  caractere = 'L';
-  id = 0x14;
+  // caractere = 'L';
+  // id = 0x14;
 
   //libererCube();  // pour tester la fonction
 
