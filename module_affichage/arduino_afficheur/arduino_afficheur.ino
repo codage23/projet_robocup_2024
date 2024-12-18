@@ -155,11 +155,11 @@ void setup() {
 // loop
 //======
 void loop() {
-  /*
+  
     // pour test de bon fonctionnement
-    caractere = 'G';
-    id = 0x17;
-  */
+    //caractere = 'G';
+    //id = 0x17;
+  
 
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {

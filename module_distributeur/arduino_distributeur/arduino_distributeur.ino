@@ -31,7 +31,7 @@ void setup() {
   monServo.attach(5);        // on définit le Pin utilisé par le servomoteur
   int position = 0;          // on positionne le servo a zero avec la variable position
   monServo.write(position);  // le bras du servomoteur prend la position de la variable position
-  delay(2000);
+  //delay(2000);
 
  //  start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
@@ -80,7 +80,7 @@ void libererCube() {
 //======
 void loop() {
 
-  delay(3000);
+  //delay(3000);
 
 // pour test du dialogue
   // caractere = 'L';

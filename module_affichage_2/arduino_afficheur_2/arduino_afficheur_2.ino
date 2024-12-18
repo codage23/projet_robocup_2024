@@ -69,47 +69,27 @@ const char tableau1[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
   { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
 };
-// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
-const char tableau2[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
-  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
-  { 'N', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
-  { 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
-  { 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 12
-  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 11
-  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'G', 'G', 'N', 'N', 'N', 'N', 'N' },  // 10
-  { 'G', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N' },  // 9
-  { 'N', 'G', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'N', 'N', 'N' },  // 7
-  { 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'G', 'G', 'N' },  // 8
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'G', 'N', 'G', 'N', 'N', 'G' },  // 6
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'R', 'N', 'G', 'N', 'G', 'N', 'N', 'G' },  // 5
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'G', 'N', 'G', 'N', 'N', 'G' },  // 4
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'G' },  // 3
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'N' },  // 2
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
-};
-// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuschia
-const char tableau3[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
-  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'G', 'G', 'N', 'N' },  // 13
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'G', 'N', 'N', 'N' },  // 12
-  { 'N', 'G', 'G', 'G', 'G', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'G', 'N', 'N', 'N' },  // 11
-  { 'N', 'G', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 10
-  { 'N', 'G', 'N', 'N', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 9
-  { 'N', 'G', 'G', 'G', 'G', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N' },  // 8
-  { 'N', 'G', 'G', 'G', 'N', 'N', 'N', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 7
-  { 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 6
-  { 'N', 'G', 'N', 'N', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
-  { 'N', 'G', 'G', 'G', 'G', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 2
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 1
-  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' }   // 0
-};
 
+// tableau representant la matrice de leds multicolores Noir Red Green Blue Yellow Fuchsia
+const char tableau4[NUM_LIGNE][NUM_COLONNE] PROGMEM = {
+  //  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
+  { 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 15
+  { 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 14
+  { 'W', 'W', 'W', 'N', 'W', 'N', 'N', 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'N', 'N' },  // 13
+  { 'W', 'W', 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'N' },  // 12
+  { 'W', 'W', 'W', 'W', 'N', 'N', 'N', 'N', 'G', 'G', 'G', 'W', 'N', 'N', 'N', 'N' },  // 11
+  { 'N', 'W', 'W', 'N', 'N', 'N', 'N', 'R', 'R', 'G', 'G', 'G', 'N', 'N', 'N', 'N' },  // 10
+  { 'N', 'N', 'W', 'W', 'N', 'N', 'R', 'R', 'R', 'R', 'G', 'G', 'G', 'N', 'N', 'N' },  // 9
+  { 'N', 'N', 'N', 'W', 'W', 'R', 'R', 'R', 'R', 'R', 'R', 'B', 'B', 'N', 'N', 'N' },  // 8
+  { 'N', 'N', 'N', 'N', 'W', 'W', 'R', 'R', 'R', 'R', 'B', 'B', 'N', 'N', 'N', 'N' },  // 7
+  { 'N', 'N', 'N', 'N', 'N', 'W', 'W', 'R', 'R', 'B', 'B', 'N', 'N', 'N', 'N', 'N' },  // 6
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 5
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 4
+  { 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N' },  // 3
+  { 'N', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'N' },  // 2
+  { 'W', 'N', 'N', 'W', 'N', 'N', 'W', 'N', 'N', 'W', 'N', 'N', 'W', 'N', 'N', 'W' },  // 1
+  { 'N', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'N' }   // 0
+};
 
 //==================================
 //  CAN reception suite interruption
@@ -135,7 +115,7 @@ void allumageLed(int i, int y, CRGB laCouleur) {
 
   leds[num] = laCouleur;
   delay(1);
-  FastLED.show();
+  //FastLED.show();
 }
 
 //======
@@ -185,14 +165,40 @@ void setup() {
 // loop
 //======
 void loop() {
-
-  delay(500);
+  // affichage tableau4
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau4[i][y]);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+    FastLED.show();
+  }
+  delay(1000);
   // affichage tableau
   for (int i = 0; i < NUM_LIGNE; i++) {
     for (int y = 0; y < NUM_COLONNE; y++) {
       char valCouleur = pgm_read_byte_near(&tableau[i][y]);
-      //Serial.print("valeur de la couleur = : ");
-      //Serial.println (valCouleur);
       if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
@@ -208,25 +214,21 @@ void loop() {
       } else if (valCouleur == 'Y') {
         laCouleur = CRGB::Yellow;
         allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
-
-        laCouleur = CRGB::Black;
-        allumageLed(i, y, laCouleur);
       }
     }
+    FastLED.show();
   }
-
-  delay(500);
-
-
+  delay(1000);
   // affichage tableau1
   for (int i = 0; i < NUM_LIGNE; i++) {
     for (int y = 0; y < NUM_COLONNE; y++) {
       char valCouleur = pgm_read_byte_near(&tableau1[i][y]);
-      //Serial.print("valeur de la couleur = : ");
-      //Serial.println (valCouleur);
       if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
@@ -242,25 +244,111 @@ void loop() {
       } else if (valCouleur == 'Y') {
         laCouleur = CRGB::Yellow;
         allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'V') {
-        laCouleur = CRGB::Violet;
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
         allumageLed(i, y, laCouleur);
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
-
-      } else {
+      }
+    }
+    FastLED.show();
+  }
+  delay(1000);
+  // affichage tableau4
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau4[i][y]);
+      if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
       }
     }
+    FastLED.show();
   }
-  // affichage tableau2
+  delay(1000);
+  // affichage tableau
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau[i][y]);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+    FastLED.show();
+  }
+  delay(1000);
+  // affichage tableau1
   for (int i = 0; i < NUM_LIGNE; i++) {
     for (int y = 0; y < NUM_COLONNE; y++) {
       char valCouleur = pgm_read_byte_near(&tableau1[i][y]);
-      //Serial.print("valeur de la couleur = : ");
-      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+    FastLED.show();
+  }
+  delay(1000);
+  // affichage tableau4
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau4[i][y]);
       if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
@@ -276,25 +364,82 @@ void loop() {
       } else if (valCouleur == 'Y') {
         laCouleur = CRGB::Yellow;
         allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'V') {
-        laCouleur = CRGB::Violet;
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
         allumageLed(i, y, laCouleur);
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
-
-      } else {
+      }
+    }
+    FastLED.show();
+  }
+  delay(1000);
+  // affichage tableau
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau[i][y]);
+      if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
       }
     }
+    FastLED.show();
   }
-  // affichage tableau3
+  delay(1000);
+  // affichage tableau1
   for (int i = 0; i < NUM_LIGNE; i++) {
     for (int y = 0; y < NUM_COLONNE; y++) {
       char valCouleur = pgm_read_byte_near(&tableau1[i][y]);
-      //Serial.print("valeur de la couleur = : ");
-      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+      }
+    }
+    FastLED.show();
+  }
+
+  delay(1000);
+  // affichage tableau4
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau4[i][y]);
       if (valCouleur == 'N') {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
@@ -310,17 +455,15 @@ void loop() {
       } else if (valCouleur == 'Y') {
         laCouleur = CRGB::Yellow;
         allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'V') {
-        laCouleur = CRGB::Violet;
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
         allumageLed(i, y, laCouleur);
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
-
-      } else {
-        laCouleur = CRGB::Black;
-        allumageLed(i, y, laCouleur);
       }
     }
+    FastLED.show();
   }
+  delay(1000);
 }

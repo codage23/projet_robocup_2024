@@ -40,7 +40,7 @@ int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 
 
 // nombre de leds par panneau 256 leds 16x16
-#define DATA_PIN_ARDUINO 9      // broche arduino
+#define DATA_PIN_ARDUINO 5      // broche arduino
 #define COLOR_ORDER         GRB
 #define CHIPSET             WS2812B
 // initial matrix layout (to get led strip index by x/y)
