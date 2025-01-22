@@ -63,8 +63,8 @@ void onReceive(int packetSize) {
 // allumage d'une led
 //====================
 void allumageLed(int i, int y, CRGB laCouleur) {
- 
-   int num;
+
+  int num;
   if ((i % 2) == 1) {
     num = 255 - (i * 16) - 15 + y;  // ligne pair
   } else {
@@ -89,7 +89,7 @@ void setup() {
   }
 
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(10);                                                 // Number 0-255
+  FastLED.setBrightness(50);                                                 // Number 0-255
   FastLED.clear(true);
 
   // effacement du tableau de leds
@@ -126,7 +126,7 @@ void setup() {
       } else if (valCouleur == 'W') {
         laCouleur = CRGB::White;
         allumageLed(i, y, laCouleur);
-        
+
       } else {
         laCouleur = CRGB::Black;
         allumageLed(i, y, laCouleur);
@@ -155,11 +155,12 @@ void setup() {
 // loop
 //======
 void loop() {
-  
-    // pour test de bon fonctionnement
-    //caractere = 'G';
-    //id = 0x17;
-  
+
+  //delay(3000);
+  // pour test de bon fonctionnement
+  //caractere = 'G';
+  //id = 0x17;
+
 
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
@@ -208,6 +209,7 @@ void loop() {
     id = 0x0;         // effacement de la variable id apres lecture
   }
 
+  //delay(3000);
   // pour test de bon fonctionnement
   //caractere = 'E';
   //id = 0x17;
@@ -220,5 +222,39 @@ void loop() {
       delay(1);
     }
     FastLED.show();
+  }
+  // affichage tableau
+  for (int i = 0; i < NUM_LIGNE; i++) {
+    for (int y = 0; y < NUM_COLONNE; y++) {
+      char valCouleur = pgm_read_byte_near(&tableau[i][y]);
+      //Serial.print("valeur de la couleur = : ");
+      //Serial.println (valCouleur);
+      if (valCouleur == 'N') {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'R') {
+        laCouleur = CRGB::Red;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'G') {
+        laCouleur = CRGB::Green;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'B') {
+        laCouleur = CRGB::Blue;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'Y') {
+        laCouleur = CRGB::Yellow;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'F') {
+        laCouleur = CRGB::Fuchsia;
+        allumageLed(i, y, laCouleur);
+      } else if (valCouleur == 'W') {
+        laCouleur = CRGB::White;
+        allumageLed(i, y, laCouleur);
+
+      } else {
+        laCouleur = CRGB::Black;
+        allumageLed(i, y, laCouleur);
+      }
+    }
   }
 }
