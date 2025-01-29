@@ -131,7 +131,7 @@ void setup() {
   }
 
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(10);                                                 // Number 0-255
+  FastLED.setBrightness(25);                                                 // Number 0-255
   FastLED.clear(true);
 
   // effacement du tableau de leds

@@ -89,7 +89,7 @@ void setup() {
   }
 
   FastLED.addLeds<CHIPSET, DATA_PIN_ARDUINO, COLOR_ORDER >(leds, NUM_LEDS);  // GRB ordering is typical
-  FastLED.setBrightness(50);                                                 // Number 0-255
+  FastLED.setBrightness(25);                                                 // Number 0-255
   FastLED.clear(true);
 
   // effacement du tableau de leds
@@ -216,44 +216,46 @@ void loop() {
 
   // effacement afficheur id 0x17
   if ((caractere == 'E') and id == 0x17) {
-    // effacement du tableau de leds 256
-    for (int i = 0; i < NUM_LEDS; i++) {
+    /*
+      // effacement du tableau de leds 256
+      for (int i = 0; i < NUM_LEDS; i++) {
       leds[i] = CRGB::Black;
       delay(1);
-    }
-    FastLED.show();
-  }
-  // affichage tableau
-  for (int i = 0; i < NUM_LIGNE; i++) {
-    for (int y = 0; y < NUM_COLONNE; y++) {
-      char valCouleur = pgm_read_byte_near(&tableau[i][y]);
-      //Serial.print("valeur de la couleur = : ");
-      //Serial.println (valCouleur);
-      if (valCouleur == 'N') {
-        laCouleur = CRGB::Black;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'R') {
-        laCouleur = CRGB::Red;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'G') {
-        laCouleur = CRGB::Green;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'B') {
-        laCouleur = CRGB::Blue;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'Y') {
-        laCouleur = CRGB::Yellow;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'F') {
-        laCouleur = CRGB::Fuchsia;
-        allumageLed(i, y, laCouleur);
-      } else if (valCouleur == 'W') {
-        laCouleur = CRGB::White;
-        allumageLed(i, y, laCouleur);
+      }
+      FastLED.show();
+    */
+    // affichage tableau
+    for (int i = 0; i < NUM_LIGNE; i++) {
+      for (int y = 0; y < NUM_COLONNE; y++) {
+        char valCouleur = pgm_read_byte_near(&tableau[i][y]);
+        //Serial.print("valeur de la couleur = : ");
+        //Serial.println (valCouleur);
+        if (valCouleur == 'N') {
+          laCouleur = CRGB::Black;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'R') {
+          laCouleur = CRGB::Red;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'G') {
+          laCouleur = CRGB::Green;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'B') {
+          laCouleur = CRGB::Blue;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'Y') {
+          laCouleur = CRGB::Yellow;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'F') {
+          laCouleur = CRGB::Fuchsia;
+          allumageLed(i, y, laCouleur);
+        } else if (valCouleur == 'W') {
+          laCouleur = CRGB::White;
+          allumageLed(i, y, laCouleur);
 
-      } else {
-        laCouleur = CRGB::Black;
-        allumageLed(i, y, laCouleur);
+        } else {
+          laCouleur = CRGB::Black;
+          allumageLed(i, y, laCouleur);
+        }
       }
     }
   }
