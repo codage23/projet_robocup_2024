@@ -15,17 +15,16 @@
 //=============================
 // inclusion des bibliothèques
 //=============================
-#include <CAN.h>           // pour la bibliothèque CAN
-#include <SPI.h>           // bus spi
-#include "variables.h"     // fichier variables
-#include <avr/pgmspace.h>  // pour utiliser la memoire flash et augmenter la memoire de travail
-#include "SoftwareSerial.h"
-#include "DFRobotDFPlayerMini.h"
+#include <CAN.h>                  // bibliothèque pour le bus CAN
+#include <SPI.h>                  // bus spi
+#include "variables.h"            // fichier variables
+#include <avr/pgmspace.h>         // pour utiliser la memoire flash et augmenter la memoire de travail
+#include "SoftwareSerial.h"       // pour disposer de rx et tx sur d'autres broches de l'arduino
+#include "DFRobotDFPlayerMini.h"  // pour la carte dfplayer
 
-DFRobotDFPlayerMini myDFPlayer;
-//SoftwareSerial mySerial(8, 9); // RX, TX
-SoftwareSerial softSerial(/*rx =*/8, /*tx =*/9);
-#define FPSerial softSerial
+DFRobotDFPlayerMini myDFPlayer;  // objet dfplayermini
+
+SoftwareSerial mySoftwareSerial(8, 9);  // RX, TX
 
 //==================================
 //  CAN reception suite interruption
@@ -41,30 +40,27 @@ void onReceive(int packetSize) {
 // setup
 //======
 void setup() {
-
   if (debug) {
     Serial.begin(9600);
     while (!Serial)
       ;
-    Serial.println("Demarrage de l'afficheur");
+    Serial.println("Demarrage du module son");
   }
-  FPSerial.begin(9600);
-  Serial.println();
-  Serial.println(F("DFRobot DFPlayer Mini Demo"));
-  Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
 
-  if (!myDFPlayer.begin(FPSerial, /*isACK = */true, /*doReset = */true)) {  //Use serial to communicate with mp3.
+  // initialisation de dfplayer mini et verification de la presence d'une carte micro sd
+  delay(3000);
+  mySoftwareSerial.begin(9600);  // vitesse de la liaison rx tx avec dfplayermini
+  if (!myDFPlayer.begin(mySoftwareSerial, /*isACK = */ true, /*doReset = */ true)) {  // communication serie rx tx.
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
     while (true) {
-      delay(0); // Code to compatible with ESP8266 watch dog.
+      delay(0);  // Code to compatible with ESP8266 watch dog.
     }
   }
-  Serial.println(F("DFPlayer Mini online."));
 
-  myDFPlayer.volume(10);  //Set volume value. From 0 to 30
-  myDFPlayer.play(1);  //Play the first mp3 5
+  Serial.println(F("DFPlayer Mini online."));
+  myDFPlayer.volume(30);  //Set volume value. From 0 to 30
 
   // start the CAN bus at 125 kbps
   if (!CAN.begin(125E3)) {
@@ -81,30 +77,30 @@ void setup() {
 
   // register the receive callback - interruption des l'arrivee d'un message sur le bus can
   CAN.onReceive(onReceive);
+
+  // pour test de bon fonctionnement
+  caractere = 'R';
+  id = 0x17;
+
 }
 
 //======
 // loop
 //======
 void loop() {
-
-  //delay(3000);
-  // pour test de bon fonctionnement
-  //caractere = 'G';
-  //id = 0x17;
-
-
   // reception de la couleur du master id 0x17 - couleur du cube
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
     if (caractere == 'R') {
       // affichage de la couleur rouge
-      myDFPlayer.next();  //Play next mp3
+      myDFPlayer.play(1);     // mp3
 
     } else if (caractere == 'G') {
       // affichage de la couleur verte
 
+
     } else if (caractere == 'B') {
       // affichage de la couleur bleue
+
 
     } else if (caractere == 'Y') {
       // affichage de la couleur jaune
@@ -124,15 +120,5 @@ void loop() {
 
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
-  }
-
-  //delay(3000);
-  // pour test de bon fonctionnement
-  //caractere = 'E';
-  //id = 0x17;
-
-  // effacement afficheur id 0x17
-  if ((caractere == 'E') and id == 0x17) {
-
   }
 }
