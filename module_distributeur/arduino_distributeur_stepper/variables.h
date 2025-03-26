@@ -8,7 +8,7 @@
 // Differentes fonctions du programme
 //========================================================
 #define TEST 0       // if 1 true,  0 false
-#define debug 1      // for use Display log message if True
+#define debug 0      // for use Display log message if True
 
 //==========================================
 // Affectation des broches de l'arduino uno
@@ -36,6 +36,9 @@ int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 // Define step constant
 //=====================
 #define MotorInterfaceType 4
+#define maxSpeed 1000.0
+#define acceleration 300.0
+#define speed 500 
 
 //==========================================
 // Affectation des broches de l'arduino uno

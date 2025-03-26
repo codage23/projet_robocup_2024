@@ -79,8 +79,8 @@ void setup() {
   CAN.onReceive(onReceive);
 
   // pour test de bon fonctionnement
-  caractere = 'R';
-  id = 0x17;
+  //caractere = 'B';
+  //id = 0x17;
 
 }
 
@@ -92,19 +92,19 @@ void loop() {
   if ((caractere == 'R' or caractere == 'G' or caractere == 'B' or caractere == 'Y') and id == 0x17) {
     if (caractere == 'R') {
       // affichage de la couleur rouge
-      myDFPlayer.play(1);     // mp3
+      myDFPlayer.play(3);     // mp3
 
     } else if (caractere == 'G') {
       // affichage de la couleur verte
-
+      myDFPlayer.play(4);     // mp3
 
     } else if (caractere == 'B') {
       // affichage de la couleur bleue
-
+      myDFPlayer.play(2);     // mp3
 
     } else if (caractere == 'Y') {
       // affichage de la couleur jaune
-
+      myDFPlayer.play(1);     // mp3
     }
 
     if (debug) {
