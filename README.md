@@ -8,7 +8,7 @@ L'ensemble, est coordonné par le module Master.
 Le but de ce concept est de trier des forme tel que des cubes celons leurs couleurs. 
 
 Pour ce faire le distributeur envoie les cubes sur le convoyeur, qui les emmènent jusqu'au portique de détection de couleur.
-Une fois la couleur détectée, l'information est transmise au bras, ensuite celle ci est annoncée à haute voie grâce au module son, de plus elle s'affiche sur le panneau led, tout ça dans le but de la révéler au publique.
+Une fois la couleur détectée, l'information est transmise au bras, ensuite celle ci est annoncée à haute voix grâce au module son, de plus elle s'affiche sur le panneau led, tout ça dans le but de la révéler au publique.
 
 Ceci fait le convoyeur emmène le cube jusqu'au détecteur de fin de course, placé au bout du convoyeur c'est lui qui donnera le signal au bras qu'il peut enfin venir chercher le cube et le ranger dans la boite prévue a cet effet.
 
