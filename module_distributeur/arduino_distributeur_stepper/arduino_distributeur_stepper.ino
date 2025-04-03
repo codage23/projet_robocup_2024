@@ -130,7 +130,7 @@ void setup() {
 
   // pour test du dialogue
   //caractere = 'L';
-  // id = 0x14;
+   //id = 0x14;
 }
 
 
@@ -164,6 +164,9 @@ void libererCube() {
   if (myStepper.currentPosition() == 1 and position == 1 or boutonTest) {
     position = 2;
   }
+   // pour test du dialogue
+  caractere = 'L';
+  id = 0x14;
 }
 
 //======
