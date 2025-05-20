@@ -37,11 +37,9 @@ int  id = 0x0;             // valeur hexa de l'identification id sur le can bus
 //=====================
 #define MotorInterfaceType 4
 #define maxSpeed 1000.0
-#define acceleration 300.0
-#define speed 500 
+#define acceleration 100.0
+#define speed 300 
 
 //==========================================
 // Affectation des broches de l'arduino uno
 //==========================================
-
-
