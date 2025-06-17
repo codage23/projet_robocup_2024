@@ -226,11 +226,12 @@ void loop() {
       position(365, 340, 150, 400, 400);
       velocidad = 350;
       // Position of the Servo Motors to exit the objet
-      position(365, 230, 150, 400, 300);
+      position(365, 200, 280, 400, 300);
       // Position of the Servo Motors to prepare
       position(365, 340, 150, 420, 300);
       couleur = '0';
     }
+0.
 
     caractere = '0';  // effacement du caratere apres lecture
     id = 0x0;         // effacement de la variable id apres lecture
